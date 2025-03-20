@@ -15,7 +15,7 @@ from transformers import T5ForConditionalGeneration, T5Tokenizer
 reader = easyocr.Reader(['en'])  # Load English OCR model
 
 # Step 2: Read text from image
-results = reader.readtext('imp2.jpg')  # Replace with your image path
+results = reader.readtext('test1.jpg')  # Replace with your image path
 
 # Extract text from OCR results
 extracted_text = " ".join([res[1] for res in results])
@@ -51,7 +51,7 @@ headers = {
 
 # ✅ Teacher's Correct Answer
 correct_answer = """
-i am a good person
+Stack is a data structure works on FIFO (First in First Out). Stack is used in paranthesis checking.
 """
 
 # ✅ Student's Answer
@@ -87,7 +87,7 @@ payload = {
     "model": "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free",
     "messages": messages,
     "temperature": 0.7,
-    "max_tokens": 300,
+    "max_tokens": 1000,
 }
 
 # ✅ Send request
@@ -108,3 +108,35 @@ if response.status_code == 200:
 
 else:
     print("❌ API Error:", response.text)
+
+
+# if response.status_code == 200:
+#     result = response.json()
+#     ai_response = result["choices"][0]["message"]["content"]
+    
+#     # ✅ Remove <think>...</think> block and extra spaces
+#     ai_response = re.sub(r"<think>.*?</think>", "", ai_response, flags=re.DOTALL).strip()
+#     ai_response = ai_response.replace("\n\n", "\n").strip()  # Remove extra newlines
+
+#     # ✅ Convert JSON string to dictionary
+#     import json
+#     try:
+#         json_start = ai_response.find("{")
+#         json_end = ai_response.rfind("}") + 1
+#         ai_json_str = ai_response[json_start:json_end]  # Extract JSON part
+#         ai_response_json = json.loads(ai_json_str)  # Parse JSON
+
+#         # ✅ Pretty-print JSON output
+#         print("\n🔹 AI Grading Report:")
+#         print(f"📊 *Similarity Percentage:* {ai_response_json['similarity_percentage']}")
+#         print(f"🎯 *Grade:* {ai_response_json['grade']}")
+#         print(f"💡 *Feedback:* {ai_response_json['feedback']}")
+#         print(f"❗ *Missing Points:* {ai_response_json['missing_points']}")
+
+#     except Exception as e:
+#         print("❌ Error parsing AI response:", e)
+#         print("🔹 Raw AI Response:\n", ai_response)
+# else:
+#     print("❌ API Error:", response.text)
+
+
