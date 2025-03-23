@@ -21,14 +21,16 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
         }
         
         body {
             background-color: var(--background-color);
             color: var(--text-color);
             position: relative;
-            min-height: 100vh;
+            height: 100vh;
             overflow-x: hidden;
+            
         }
         
         /* Navbar styles to match the image */
@@ -139,7 +141,7 @@
         
         @media (min-width: 768px) {
             .main-content {
-                grid-template-columns: 7fr 3fr;
+                
             }
         }
         
@@ -320,65 +322,7 @@
             color: #2e7d32;
         }
         
-        /* Portal cards with 3D effect */
-        .portal-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .portal-card {
-            background-color: var(--primary-color);
-            color: white;
-            width: 250px;
-            height: 200px;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(99, 99, 247, 0.3);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .portal-card:before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, var(--primary-color), #8a8aff);
-            z-index: -1;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-        
-        .portal-card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 20px 30px rgba(99, 99, 247, 0.4);
-        }
-        
-        .portal-card:hover:before {
-            transform: rotate(5deg);
-        }
-        
-        .portal-card h2 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .portal-card p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+       
         
         @keyframes float {
             0% { transform: translate3d(0, 0, 0) rotate(0deg); }
@@ -413,18 +357,6 @@
             <p>Track your test results, upload assignments, and get feedback</p>
         </header>
         
-        <!-- Portal Cards -->
-        <div class="portal-container">
-            <div class="portal-card">
-                <h2>Teacher Portal</h2>
-                <p>Upload papers, update feedback</p>
-            </div>
-            
-            <div class="portal-card">
-                <h2>Student Portal</h2>
-                <p>Check the grade & feedback</p>
-            </div>
-        </div>
         
         <div class="main-content">
             <div class="main-panel">
