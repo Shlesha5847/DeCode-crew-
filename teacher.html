@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tracking System</title>
+    <style>
+        :root {
+            --primary-color: #6363F7;
+            --secondary-color: #f0f2ff;
+            --accent-color: #ff7b00;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --background-color: #e6e6fa; /* Matching the lavender background */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar styles to match the image */
+        .navbar {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .navbar .logo {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        /* 3D Elements */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s, box-shadow 0.3s;
+            perspective: 1000px;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .bg-element {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.07;
+            transform-style: preserve-3d;
+            animation: float 20s ease-in-out infinite alternate;
+        }
+        
+        .bg-element-1 {
+            top: 5%;
+            left: 10%;
+            font-size: 120px;
+            color: var(--primary-color);
+            transform: rotate(10deg) translateZ(20px);
+        }
+        
+        .bg-element-2 {
+            top: 30%;
+            right: 15%;
+            font-size: 100px;
+            color: var(--accent-color);
+            transform: rotate(-5deg) translateZ(30px);
+        }
+        
+        .bg-element-3 {
+            bottom: 15%;
+            left: 20%;
+            font-size: 80px;
+            color: var(--primary-color);
+            transform: rotate(15deg) translateZ(25px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            perspective: 1000px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            transform-style: preserve-3d;
+            transition: transform 0.3s;
+        }
+        
+        header:hover {
+            transform: scale(1.02) translateZ(10px);
+        }
+        
+        header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            perspective: 1000px;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 7fr 3fr;
+            }
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            transform-style: preserve-3d;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px) rotateX(3deg);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        
+        .ai-assist-section {
+            position: relative;
+            padding-top: 20px;
+        }
+        
+        .ai-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            font-weight: bold;
+            transform: translateZ(15px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(99, 99, 247, 0.2);
+            transform: translateZ(5px);
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+        
+        button:hover {
+            background-color: #5252e0;
+            transform: translateY(-3px) translateZ(10px);
+            box-shadow: 0 8px 15px rgba(99, 99, 247, 0.3);
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            padding: 30px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            transform: translateZ(8px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .file-upload i {
+            font-size: 48px;
+            color: #aaa;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .file-upload:hover i {
+            transform: translateZ(15px) scale(1.1);
+        }
+        
+        .file-upload p {
+            margin: 0;
+            color: #777;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .test-list {
+            list-style: none;
+        }
+        
+        .test-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+        
+        .test-item:hover {
+            transform: translateX(5px) translateZ(10px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-item-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .test-item-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 5px;
+            transform: translateZ(5px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-pending {
+            background-color: #ffe0b2;
+            color: #e65100;
+        }
+        
+        .status-graded {
+            background-color: #c8e6c9;
+            color: #2e7d32;
+        }
+        
+        /* Portal cards with 3D effect */
+        .portal-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .portal-card {
+            background-color: var(--primary-color);
+            color: white;
+            width: 250px;
+            height: 200px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(99, 99, 247, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portal-card:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--primary-color), #8a8aff);
+            z-index: -1;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .portal-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(99, 99, 247, 0.4);
+        }
+        
+        .portal-card:hover:before {
+            transform: rotate(5deg);
+        }
+        
+        .portal-card h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .portal-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        @keyframes float {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+            25% { transform: translate3d(15px, -15px, 20px) rotate(2deg); }
+            50% { transform: translate3d(0, 15px, 10px) rotate(-1deg); }
+            75% { transform: translate3d(-15px, -5px, 15px) rotate(1deg); }
+            100% { transform: translate3d(5px, -15px, 5px) rotate(-2deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">AI Assist</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Teacher</a>
+            <a href="#">Student</a>
+            <a href="#">About</a>
+            <a href="#">Support</a>
+        </div>
+    </div>
+    
+    <!-- Dynamic Background Elements -->
+    <div class="bg-element bg-element-1">A+</div>
+    <div class="bg-element bg-element-2">📝</div>
+    <div class="bg-element bg-element-3">✓</div>
+    
+    <div class="container">
+        <header>
+            <h1>Test Tracking System</h1>
+            <p>Track your test results, upload assignments, and get feedback</p>
+        </header>
+        
+        <!-- Portal Cards -->
+        <div class="portal-container">
+            <div class="portal-card">
+                <h2>Teacher Portal</h2>
+                <p>Upload papers, update feedback</p>
+            </div>
+            
+            <div class="portal-card">
+                <h2>Student Portal</h2>
+                <p>Check the grade & feedback</p>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="main-panel">
+                <div class="card ai-assist-section card-3d">
+                    <div class="ai-badge">AI Assist</div>
+                    <h2 class="card-title">Upload Test Papers</h2>
+                    
+                    <form id="test-form">
+                        <div class="form-group">
+                            <label for="id">Teacher ID:</label>
+                            <input type="text" id="id" name="teacher_id" placeholder="Enter Teacher ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="test-type">Type of Test</label>
+                            <select id="test-type" required>
+                                <option value="">Select test type</option>
+                                <option value="mcq">MCQs</option>
+                                <option value="fill_ups">Fill_Ups</option>
+                                <option value="one_word">One_Word</option>
+                                <option value="q&a">Handwritten type</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="level">Class</label>
+                            <select id="level" required>
+                                <option value="">Select level</option>
+                                <option value="class_8">Class 8th</option>
+                                <option value="class_9">Class 9th</option>
+                                <option value="class_10">Class 10th</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload File</label>
+                            <div class="file-upload" id="file-upload-area">
+                                <i>📄</i>
+                                <p>Drag and drop your test file here or click to browse</p>
+                                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png">
+                            </div>
+                            <p id="file-name"></p>
+                        </div>
+                        
+                        <button type="submit">Submit Test Results</button>
+                    </form>
+                </div>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h2 class="card-title">Recent Tests</h2>
+                    
+                    <ul class="test-list" id="test-list">
+                        <!-- This will be populated by JavaScript -->
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample test data
+            let tests = [
+                {
+                    id: 1,
+                    type: 'Mathematics',
+                    level: 'Class 10th',
+                    levelAchieved: 'B',
+                    score: 85,
+                    date: '2025-03-15',
+                    status: 'graded'
+                },
+                {
+                    id: 2,
+                    type: 'English',
+                    level: 'Class 9th',
+                    levelAchieved: 'A',
+                    score: 92,
+                    date: '2025-03-10',
+                    status: 'graded'
+                },
+                {
+                    id: 3,
+                    type: 'Science',
+                    level: 'Class 8th',
+                    levelAchieved: 'C',
+                    score: 78,
+                    date: '2025-03-05',
+                    status: 'graded'
+                }
+            ];
+            
+            // Render the test list
+            function renderTestList() {
+                const testList = document.getElementById('test-list');
+                testList.innerHTML = '';
+                
+                if (tests.length === 0) {
+                    testList.innerHTML = '<p>No tests uploaded yet.</p>';
+                    return;
+                }
+                
+                // Sort tests by date (newest first)
+                const sortedTests = [...tests].sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                sortedTests.forEach(test => {
+                    const testItem = document.createElement('li');
+                    testItem.className = 'test-item';
+                    
+                    const statusClass = test.status === 'pending' ? 'status-pending' : 'status-graded';
+                    const statusText = test.status === 'pending' ? 'Pending Review' : 'Graded';
+                    
+                    testItem.innerHTML = `
+                        <div class="test-item-details">
+                            <h3>${test.type}</h3>
+                            <p>Level: ${test.level} | Date: ${formatDate(test.date)}</p>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="test-item-score">${test.score}%</div>
+                    `;
+                    
+                    testList.appendChild(testItem);
+                });
+            }
+            
+            // Format date helper
+            function formatDate(dateString) {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            }
+            
+            // File upload handling
+            const fileUploadArea = document.getElementById('file-upload-area');
+            const fileInput = document.getElementById('file-input');
+            const fileNameDisplay = document.getElementById('file-name');
+            
+            fileUploadArea.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            fileUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileUploadArea.style.borderColor = var(--primary-color);
+                fileUploadArea.style.backgroundColor = '#f0f2ff';
+            });
+            
+            fileUploadArea.addEventListener('dragleave', () => {
+                fileUploadArea.style.borderColor = '#ddd';
+                fileUploadArea.style.backgroundColor = 'transparent';
+            });
+            
+            fileUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileUploadArea.style.borderColor = '#ddd';
+                fileUploadArea.style.backgroundColor = 'transparent';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    fileNameDisplay.textContent = `Selected file: ${files[0].name}`;
+                }
+            });
+            
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = `Selected file: ${fileInput.files[0].name}`;
+                } else {
+                    fileNameDisplay.textContent = '';
+                }
+            });
+            
+            // Form submission handling
+            const testForm = document.getElementById('test-form');
+            
+            testForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const testType = document.getElementById('test-type').value;
+                const level = document.getElementById('level').value;
+                
+                // Create a score
+                const score = Math.floor(Math.random() * 31) + 70; // 70-100
+                
+                // Create a new test object
+                const newTest = {
+                    id: tests.length + 1,
+                    type: document.getElementById('test-type').options[document.getElementById('test-type').selectedIndex].text,
+                    level: document.getElementById('level').options[document.getElementById('level').selectedIndex].text,
+                    score: score,
+                    date: new Date().toISOString().split('T')[0],
+                    status: 'graded'
+                };
+                
+                // Add to tests array
+                tests.push(newTest);
+                
+                // Update UI
+                renderTestList();
+                
+                // Reset form
+                testForm.reset();
+                fileNameDisplay.textContent = '';
+                
+                // Show success message
+                alert('Test results submitted successfully!');
+            });
+            
+            // Portal cards interaction
+            const portalCards = document.querySelectorAll('.portal-card');
+            portalCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-15px) scale(1.05) rotateX(10deg)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1) rotateX(0)';
+                });
+                
+                card.addEventListener('click', () => {
+                    const title = card.querySelector('h2').textContent;
+                    alert(`${title} will be available soon!`);
+                });
+            });
+            
+            // Initial rendering
+            renderTestList();
+            
+            // Add 3D perspective effect to cards
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 20;
+                    const angleY = (centerX - x) / 20;
+                    
+                    this.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
