@@ -42,6 +42,9 @@
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
         
         .navbar .logo {
@@ -110,6 +113,7 @@
             margin: 0 auto;
             padding: 20px;
             perspective: 1000px;
+            z-index: 0;
         }
         
         header {
@@ -152,6 +156,7 @@
             box-shadow: var(--box-shadow);
             transform-style: preserve-3d;
             transition: transform 0.3s, box-shadow 0.3s;
+            
         }
         
         .card:hover {
@@ -391,7 +396,16 @@
                         </div>
                         
                         <div class="form-group">
-                            <label>Upload File</label>
+                            <label>Upload Student File</label>
+                            <div class="file-upload" id="file-upload-area">
+                                <i>📄</i>
+                                <p>Drag and drop your test file here or click to browse</p>
+                                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png">
+                            </div>
+                            <p id="file-name"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Correct Answer File</label>
                             <div class="file-upload" id="file-upload-area">
                                 <i>📄</i>
                                 <p>Drag and drop your test file here or click to browse</p>
@@ -404,13 +418,7 @@
                     </form>
                 </div>
                 
-                <div class="card" style="margin-top: 20px;">
-                    <h2 class="card-title">Recent Tests</h2>
-                    
-                    <ul class="test-list" id="test-list">
-                        <!-- This will be populated by JavaScript -->
-                    </ul>
-                </div>
+                
             </div>
             
         </div>
