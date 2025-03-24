@@ -457,44 +457,6 @@
                 }
             ];
             
-            // Render the test list
-            function renderTestList() {
-                const testList = document.getElementById('test-list');
-                testList.innerHTML = '';
-                
-                if (tests.length === 0) {
-                    testList.innerHTML = '<p>No tests uploaded yet.</p>';
-                    return;
-                }
-                
-                // Sort tests by date (newest first)
-                const sortedTests = [...tests].sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                sortedTests.forEach(test => {
-                    const testItem = document.createElement('li');
-                    testItem.className = 'test-item';
-                    
-                    const statusClass = test.status === 'pending' ? 'status-pending' : 'status-graded';
-                    const statusText = test.status === 'pending' ? 'Pending Review' : 'Graded';
-                    
-                    testItem.innerHTML = `
-                        <div class="test-item-details">
-                            <h3>${test.type}</h3>
-                            <p>Level: ${test.level} | Date: ${formatDate(test.date)}</p>
-                            <span class="status-badge ${statusClass}">${statusText}</span>
-                        </div>
-                        <div class="test-item-score">${test.score}%</div>
-                    `;
-                    
-                    testList.appendChild(testItem);
-                });
-            }
-            
-            // Format date helper
-            function formatDate(dateString) {
-                const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                return new Date(dateString).toLocaleDateString(undefined, options);
-            }
             
             // File upload handling
             const fileUploadArea = document.getElementById('file-upload-area');
@@ -589,8 +551,6 @@
                 });
             });
             
-            // Initial rendering
-            renderTestList();
             
             // Add 3D perspective effect to cards
             const cards = document.querySelectorAll('.card');
