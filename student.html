@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assist - Student Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f0ff;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            color: #5757f0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            background-color: #6d6dff;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .hero h1 {
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .login-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background-color: #6d6dff;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #5757f0;
+        }
+        
+        /* Dashboard styles */
+        .dashboard {
+            display: none;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #5757f0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card .label {
+            color: #666;
+        }
+        
+        .recent-tests {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: #f8f8ff;
+        }
+        
+        tr:hover {
+            background-color: #f8f8ff;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .badge-success {
+            background-color: #d4ffe4;
+            color: #0a6e31;
+        }
+        
+        .badge-warning {
+            background-color: #fff8d4;
+            color: #8a6e0a;
+        }
+        
+        .badge-danger {
+            background-color: #ffd4d4;
+            color: #6e0a0a;
+        }
+        
+        /* Animation styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .wave-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            z-index: -1;
+            opacity: 0.1;
+            background: linear-gradient(
+                45deg,
+                #5757f0 0%,
+                #6d6dff 25%,
+                #7f7fff 50%,
+                #9393ff 75%,
+                #b4b4ff 100%
+            );
+            clip-path: polygon(
+                0% 100%,
+                0% 35%,
+                15% 45%,
+                30% 35%,
+                45% 45%,
+                60% 35%,
+                75% 45%,
+                90% 35%,
+                100% 45%,
+                100% 100%
+            );
+        }
+
+        /* Floating circles dynamic background */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(to right, #6d6dff, #9393ff);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .circle1 {
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .circle2 {
+            top: 40%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .circle3 {
+            bottom: 10%;
+            left: 20%;
+            width: 150px;
+            height: 150px;
+            animation: float 7s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(15px, 15px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Background Elements -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="wave-bg"></div>
+    
+    <header class="header">
+        <a href="#" class="logo">AI Assist</a>
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Teacher</a>
+            <a href="#">Student</a>
+            <a href="#">About</a>
+            <a href="#">Support</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- Student Login Page -->
+        <div id="login-page" class="animated">
+            <div class="hero">
+                <h1>Student Portal Access</h1>
+                <p>View your assignments, grades, and personalized feedback</p>
+            </div>
+            
+            <div class="card login-form">
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">Enter Student Information</h2>
+                
+                <div class="form-group">
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" placeholder="Enter your student ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">Class:</label>
+                    <select id="class">
+                        <option value="">Select your class</option>
+                        <option value="1">Class 6</option>
+                        <option value="2">Class 7</option>
+                        <option value="3">Class 8</option>
+                        <option value="4">Class 9</option>
+                        <option value="5">Class 10</option>
+                    </select>
+                </div>
+                
+                <button type="button" id="login-btn" class="btn" style="width: 100%;">Access Dashboard</button>
+            </div>
+        </div>
+        
+        <!-- Student Dashboard Page -->
+        <div id="dashboard-page" class="dashboard animated">
+            <div class="hero">
+                <h1>Welcome, Student!</h1>
+                <p>Track your progress, view assignments, and access feedback</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">87%</div>
+                    <div class="label">Average Score</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">12</div>
+                    <div class="label">Tests Completed</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">3</div>
+                    <div class="label">Pending Assignments</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">97%</div>
+                    <div class="label">Attendance</div>
+                </div>
+            </div>
+            
+            <div class="recent-tests">
+                <h2 style="margin-bottom: 1rem;">Recent Tests & Assignments</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test Name</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mid-Term Exam</td>
+                            <td>Mathematics</td>
+                            <td>20 Mar 2025</td>
+                            <td>92/100</td>
+                            <td><span class="badge badge-success">Graded</span></td>
+                        </tr>
+                        <tr>
+                            <td>Weekly Quiz</td>
+                            <td>Science</td>
+                            <td>18 Mar 2025</td>
+                            <td>45/50</td>
+                            <td><span class="badge badge-success">Graded</span></td>
+                        </tr>
+                        <tr>
+                            <td>Research Paper</td>
+                            <td>History</td>
+                            <td>15 Mar 2025</td>
+                            <td>-</td>
+                            <td><span class="badge badge-warning">Pending Review</span></td>
+                        </tr>
+                        <tr>
+                            <td>Final Assignment</td>
+                            <td>English</td>
+                            <td>22 Mar 2025</td>
+                            <td>-</td>
+                            <td><span class="badge badge-danger">Due Tomorrow</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple toggle between login and dashboard for demo purposes
+        document.getElementById('login-btn').addEventListener('click', function() {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('dashboard-page').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
