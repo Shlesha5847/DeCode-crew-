@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     fileUploadArea.addEventListener('dragover', (e) => {
         e.preventDefault();
-        fileUploadArea.style.borderColor = var(--primary-color);
+        fileUploadArea.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
         fileUploadArea.style.backgroundColor = '#f0f2ff';
     });
     
