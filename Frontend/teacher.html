@@ -323,9 +323,7 @@
             background-color: #c8e6c9;
             color: #2e7d32;
         }
-        
-       
-        
+         
         @keyframes float {
             0% { transform: translate3d(0, 0, 0) rotate(0deg); }
             25% { transform: translate3d(15px, -15px, 20px) rotate(2deg); }
@@ -354,7 +352,7 @@
     <div class="bg-element bg-element-2">📝</div>
     <div class="bg-element bg-element-3">✓</div>
     
-    <div class="container">
+    <div  class="container">
         <header>
             <h1>Test Tracking System</h1>
             <p>Track your test results, upload assignments, and get feedback</p>
@@ -370,11 +368,11 @@
                     <form id="test-form">
                         <div class="form-group">
                             <label for="id">Teacher ID:</label>
-                            <input type="text" id="id" name="teacher_id" placeholder="Enter Teacher ID">
+                            <input type="text" id="teacher-id" name="teacher_id" placeholder="Enter Teacher ID">
                         </div>
                         <div class="form-group">
                             <label for="id">Student ID:</label>
-                            <input type="text" id="id" name="teacher_id" placeholder="Enter Student ID">
+                            <input type="text" id="student-id" name="student" placeholder="Enter Student ID">
                         </div>
                         <div class="form-group">
                             <label for="test-type">Type of Test</label>
@@ -404,7 +402,7 @@
                             <div class="file-upload" id="file-upload-area">
                                 <i>📄</i>
                                 <p>Drag and drop your test file here or click to browse</p>
-                                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png">
+                                <input type="file" id="student-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
                         </div>
@@ -413,7 +411,7 @@
                             <div class="file-upload" id="file-upload-area">
                                 <i>📄</i>
                                 <p>Drag and drop your test file here or click to browse</p>
-                                <input type="file" id="file-input" accept=".pdf,.doc,.docx,.jpg,.png">
+                                <input type="file" id="answer-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
                         </div>
@@ -428,8 +426,21 @@
     </div>
     <script>
         document.getElementById("but").addEventListener("click", function () {
-            alert("hi");
+            event.preventDefault();
+            let teacherID = document.getElementById("teacher-id").value;
+            let studentID = document.getElementById("student-id").value;
+            let testType = document.getElementById("test-type").value;
+            let studentClass = document.getElementById("level").value;
+        if (!teacherID || !studentID || !testType || !studentClass) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+        window.location.href = `results.html?teacherID=${teacherID}&studentID=${studentID}&testType=${testType}&studentClass=${studentClass}`;
         });
+        function goBack() {
+            document.getElementById('subs').style.display = 'none';
+            document.getElementById('mains').style.display = 'block';
+        }
     </script>
    
 </body>

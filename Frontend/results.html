@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assist - Teacher Feedback</title>
+    <style>
+        :root {
+            --primary-color: #6363F7;
+            --secondary-color: #f0f2ff;
+            --accent-color: #ff7b00;
+            --text-color: #333;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .result-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-header h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .result-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            background-color: var(--secondary-color);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        .detail-item label {
+            display: block;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .detail-item .value {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .performance-summary {
+            background-color: var(--secondary-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+        }
+
+        .grade-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .grade {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .grade-input {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grade-input label {
+            font-weight: bold;
+        }
+
+        .grade-input .original-grade {
+            margin-right: 15px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .grade-input input {
+            width: 60px;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .feedback-section {
+            margin-top: 1rem;
+        }
+
+        .feedback-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            resize: vertical;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5252e0;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0ff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .result-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">AI Assist</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="student.html">Student</a>
+            <a href="#">About</a>
+            <a href="#">Support</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="result-card">
+            <div class="result-header">
+                <h1>Student Test Evaluation</h1>
+                <span class="date">Date: March 27, 2024</span>
+            </div>
+
+            <div class="result-details">
+                <div class="detail-item">
+                    <label>Teacher Id</label>
+                    <div class="value"><span id="teacherID"></span></div>
+                </div>
+                <div class="detail-item">
+                    <label>Student ID</label>
+                    <div class="value"><span id="studentID"></span></div>
+                </div>
+                <!-- <p><strong>Teacher ID:</strong> <span id="teacherID"></span></p> -->
+                <div class="detail-item">
+                    <label>Class</label>
+                    <div class="value"><span id="studentClass"></span></div>
+                </div>
+                <div class="detail-item">
+                    <label>Test Type</label>
+                    <div class="value"><span id="testType"></span></div>
+                </div>
+                <div class="detail-item">
+                    <label>Total Marks</label>
+                    <div class="value">100</div>
+                </div>
+            </div>
+
+            <div class="performance-summary">
+                <div class="grade-section">
+                    <div class="grade">Grade</div>
+                    <div class="grade-input">
+                        <span class="original-grade">Original Grade: A</span>
+                        <label>Update Grade:</label>
+                        <input type="text" id="student-grade" placeholder="/10">
+                    </div>
+                </div>
+
+                <div class="feedback-section">
+                    <label>Feedback:</label>
+                    <textarea id="teacher-feedback" class="feedback-textarea" placeholder="Write detailed feedback for the student...">Excellent work! Your understanding of algebraic concepts is impressive. Keep up the great effort and continue to challenge yourself.</textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="save-feedback" class="btn btn-primary">Save Feedback</button>
+                <button id="cancel" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        teacherID: params.get("teacherID"),
+        studentID: params.get("studentID"),
+        testType: params.get("testType"),
+        studentClass: params.get("studentClass")
+    };
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const params = getQueryParams();
+
+    document.getElementById("teacherID").textContent = params.teacherID || 'N/A';
+    document.getElementById("studentID").textContent = params.studentID || 'N/A';
+    document.getElementById("testType").textContent = params.testType || 'N/A';
+    document.getElementById("studentClass").textContent = params.studentClass || 'N/A';
+
+    const saveFeedbackBtn = document.getElementById('save-feedback');
+    const cancelBtn = document.getElementById('cancel');
+
+    saveFeedbackBtn.addEventListener('click', function() {
+        const originalGrade = '6'; // This would come from backend in real scenario
+        const newGrade = document.getElementById('student-grade').value;
+        const feedback = document.getElementById('teacher-feedback').value;
+
+        // Update original grade display
+        document.querySelector(".original-grade").innerText = `Original Grade: ${originalGrade}`;
+
+        // Basic validation
+        if (!feedback) {
+            alert('Please enter feedback');
+            return;
+        }
+
+        // Prepare message to show changes
+        let gradeChangeMessage = newGrade 
+            ? (newGrade !== originalGrade 
+                ? `Grade changed from ${originalGrade} to ${newGrade}` 
+                : 'No grade change')
+            : 'Grade remained ' + originalGrade;
+
+        // Here you would typically send this data to a backend server
+        // For now, we'll just show an alert
+        alert('Feedback Saved Successfully!\n\n' + 
+              gradeChangeMessage + '\n' +
+              'Feedback: ' + feedback);
+
+        // Optional: Disable editing after submission
+        document.getElementById('teacher-feedback').setAttribute('disabled', true);
+        this.setAttribute('disabled', true);
+    });
+
+    cancelBtn.addEventListener('click', function() {
+        // Redirect to teacher dashboard or previous page
+        window.location.href = 'teacher.html';
+    });
+});
+    </script>
+</body>
+</html>
