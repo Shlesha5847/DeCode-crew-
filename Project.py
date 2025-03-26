@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")  # Suppress warnings
 reader = easyocr.Reader(['en'])  # Load English OCR model
 
 # ✅ Step 2: Read text from image
-image_path = 'Testing2.jpg'  # Replace with your image path
+image_path = 'Numbersimg.jpg'  # Replace with your image path
 results = reader.readtext(image_path)
 
 # ✅ Extract text from OCR results
@@ -19,10 +19,12 @@ print("OCR Extracted Text:", extracted_text)
 
 # ✅ Step 3: Spell Correction
 spell = SpellChecker()
+def correct_word(word):
+    """Correct only words containing only alphabets, keep numbers and symbols unchanged."""
+    return spell.correction(word) if re.match(r'^[a-zA-Z]+$', word) else word
 words = extracted_text.split()
-corrected_text = " ".join([spell.correction(word) or word for word in words])
+corrected_text = " ".join([correct_word(word) for word in words])
 print("Corrected Text:", corrected_text)
-
 # ✅ Step 4: Configure Google Gemini API
 GEMINI_API_KEY = "AIzaSyBO7EU1gsy7kGKSeTyfBEKZPlvdRDCAIT0"  # Replace with your API key
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
