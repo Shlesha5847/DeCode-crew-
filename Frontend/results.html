@@ -115,6 +115,7 @@
             background-color: var(--secondary-color);
             border-radius: var(--border-radius);
             padding: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .grade-section {
@@ -344,6 +345,43 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = 'teacher.html';
     });
 });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const testResults = {
+                "MCQ": {
+                    "score": "8/10",
+                    "feedback": "You got 8 correct out of 10. Review question 3 and 7."
+                },
+                "FillUps": {
+                    "score": "7/10",
+                    "feedback": "You missed 3 blanks. Check your spelling for blank 2."
+                },
+                "OneWord": {
+                    "score": "9/10",
+                    "feedback": "Only one mistake. Great job!"
+                },
+                "Handwritten": {
+                    "similarity_percentage": "85%",
+                    "grade": "8/10",
+                    "feedback": "Your answer is mostly correct but lacks explanation.",
+                    "missing_points": ["Detailed explanation of stack usage"]
+                }
+            };
+
+            const testResultsContainer = document.getElementById("test-results");
+            Object.keys(testResults).forEach(testType => {
+                const test = testResults[testType];
+                const section = document.createElement("div");
+                section.innerHTML = `
+                    <h3>${testType}:</h3>
+                    <p><strong>Score:</strong> ${test.score || test.grade}</p>
+                    <p><strong>Feedback:</strong> ${test.feedback}</p>
+                    ${test.missing_points ? `<p><strong>Missing Points:</strong> ${test.missing_points.join(", ")}</p>` : ''}
+            `;
+                testResultsContainer.appendChild(section);
+            });
+        });
+
     </script>
 </body>
 </html>
