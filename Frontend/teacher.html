@@ -399,18 +399,14 @@
                         
                         <div class="form-group">
                             <label>Upload Student File</label>
-                            <div class="file-upload" id="file-upload-area">
-                                <i>📄</i>
-                                <p>Drag and drop your test file here or click to browse</p>
+                            <div class="file-upload1" id="file-upload-area">
                                 <input type="file" id="student-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
                         </div>
                         <div class="form-group">
                             <label>Upload Correct Answer File</label>
-                            <div class="file-upload" id="file-upload-area">
-                                <i>📄</i>
-                                <p>Drag and drop your test file here or click to browse</p>
+                            <div class="file-upload2" id="file-upload-area">
                                 <input type="file" id="answer-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
@@ -441,6 +437,23 @@
             document.getElementById('subs').style.display = 'none';
             document.getElementById('mains').style.display = 'block';
         }
+        function handleFileUpload(inputId, displayId) {
+      const input = document.getElementById(inputId);
+      const display = document.getElementById(displayId);
+
+      input.addEventListener("change", function () {
+        if (input.files.length > 0) {
+          display.textContent = `Selected file: ${input.files[0].name}`;
+        } else {
+          display.textContent = "No file selected.";
+        }
+      });
+    }
+
+    handleFileUpload("fileUpload1", "fileDisplay1");
+    handleFileUpload("fileUpload2", "fileDisplay2");
+
+
     </script>
    
 </body>
