@@ -263,8 +263,8 @@
                 </div>
             </div>
 
-            <div class="performance-summary">
-                <div class="grade-section">
+            <div class="performance-summary" id="test-results">
+                <!-- <div class="grade-section">
                     <div class="grade">Grade</div>
                     <div class="grade-input">
                         <span class="original-grade">Original Grade: A</span>
@@ -276,7 +276,7 @@
                 <div class="feedback-section">
                     <label>Feedback:</label>
                     <textarea id="teacher-feedback" class="feedback-textarea" placeholder="Write detailed feedback for the student...">Excellent work! Your understanding of algebraic concepts is impressive. Keep up the great effort and continue to challenge yourself.</textarea>
-                </div>
+                </div> -->
             </div>
 
             <div class="action-buttons">
@@ -288,16 +288,16 @@
 
     <script>
         function getQueryParams() {
-    const params = new URLSearchParams(window.location.search);
-    return {
-        teacherID: params.get("teacherID"),
-        studentID: params.get("studentID"),
-        testType: params.get("testType"),
-        studentClass: params.get("studentClass")
-    };
-}
+            const params = new URLSearchParams(window.location.search);
+            return {
+                teacherID: params.get("teacherID"),
+                studentID: params.get("studentID"),
+                testType: params.get("testType"),
+                studentClass: params.get("studentClass")
+            };
+        }
 
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     const params = getQueryParams();
 
     document.getElementById("teacherID").textContent = params.teacherID || 'N/A';
@@ -305,62 +305,68 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("testType").textContent = params.testType || 'N/A';
     document.getElementById("studentClass").textContent = params.studentClass || 'N/A';
 
-    const saveFeedbackBtn = document.getElementById('save-feedback');
-    const cancelBtn = document.getElementById('cancel');
+    // const saveFeedbackBtn = document.getElementById('save-feedback');
+    // const cancelBtn = document.getElementById('cancel');
 
-    saveFeedbackBtn.addEventListener('click', function() {
-        const originalGrade = '6'; // This would come from backend in real scenario
-        const newGrade = document.getElementById('student-grade').value;
-        const feedback = document.getElementById('teacher-feedback').value;
+    // saveFeedbackBtn.addEventListener('click', function() {
+    //     const originalGrade = '6'; // This would come from backend in real scenario
+    //     const newGrade = document.getElementById('student-grade').value;
+    //     const feedback = document.getElementById('teacher-feedback').value;
 
-        // Update original grade display
-        document.querySelector(".original-grade").innerText = `Original Grade: ${originalGrade}`;
+    //     // Update original grade display
+    //     document.querySelector(".original-grade").innerText = `Original Grade: ${originalGrade}`;
 
-        // Basic validation
-        if (!feedback) {
-            alert('Please enter feedback');
-            return;
-        }
+    //     // Basic validation
+    //     if (!feedback) {
+    //         alert('Please enter feedback');
+    //         return;
+    //     }
 
-        // Prepare message to show changes
-        let gradeChangeMessage = newGrade 
-            ? (newGrade !== originalGrade 
-                ? `Grade changed from ${originalGrade} to ${newGrade}` 
-                : 'No grade change')
-            : 'Grade remained ' + originalGrade;
+    //     // Prepare message to show changes
+    //     // let gradeChangeMessage = newGrade 
+    //     //     ? (newGrade !== originalGrade 
+    //     //         ? `Grade changed from ${originalGrade} to ${newGrade}` 
+    //     //         : 'No grade change')
+    //     //     : 'Grade remained ' + originalGrade;
 
-        // Here you would typically send this data to a backend server
-        // For now, we'll just show an alert
-        alert('Feedback Saved Successfully!\n\n' + 
-              gradeChangeMessage + '\n' +
-              'Feedback: ' + feedback);
+    //     // Here you would typically send this data to a backend server
+    //     // For now, we'll just show an alert
+    //     alert('Feedback Saved Successfully!\n\n' + 
+    //           gradeChangeMessage + '\n' +
+    //           'Feedback: ' + feedback);
 
-        // Optional: Disable editing after submission
-        document.getElementById('teacher-feedback').setAttribute('disabled', true);
-        this.setAttribute('disabled', true);
-    });
+    //     // Optional: Disable editing after submission
+    //     document.getElementById('teacher-feedback').setAttribute('disabled', true);
+    //     this.setAttribute('disabled', true);
+    // });
 
-    cancelBtn.addEventListener('click', function() {
-        // Redirect to teacher dashboard or previous page
-        window.location.href = 'teacher.html';
-    });
+    // cancelBtn.addEventListener('click', function() {
+    //     // Redirect to teacher dashboard or previous page
+    //     window.location.href = 'teacher.html';
+    // });
+
+
 });
 
         document.addEventListener("DOMContentLoaded", function () {
+            let spanElement = document.getElementById("testType");
+            let str = String(spanElement.textContent);
+            //alert(str);
+
             const testResults = {
-                "MCQ": {
+                "mcq": {
                     "score": "8/10",
                     "feedback": "You got 8 correct out of 10. Review question 3 and 7."
                 },
-                "FillUps": {
+                "fill_ups": {
                     "score": "7/10",
                     "feedback": "You missed 3 blanks. Check your spelling for blank 2."
                 },
-                "OneWord": {
+                "one_word": {
                     "score": "9/10",
                     "feedback": "Only one mistake. Great job!"
                 },
-                "Handwritten": {
+                "q&a": {
                     "similarity_percentage": "85%",
                     "grade": "8/10",
                     "feedback": "Your answer is mostly correct but lacks explanation.",
@@ -369,17 +375,23 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             const testResultsContainer = document.getElementById("test-results");
-            Object.keys(testResults).forEach(testType => {
-                const test = testResults[testType];
+            if(testResults[str]){
+                const test = testResults[str];
                 const section = document.createElement("div");
-                section.innerHTML = `
-                    <h3>${testType}:</h3>
-                    <p><strong>Score:</strong> ${test.score || test.grade}</p>
-                    <p><strong>Feedback:</strong> ${test.feedback}</p>
+                section.innerHTML = `<h2>Test Results</h2>
+                    <h3>${str}</h3>
+                    <p><strong>Score:</strong>
+                    <input id="student-grade" placeholder=${test.score || test.grade}>
+                    <p><strong>Feedback:</strong></p>
+                    <textarea id="teacher-feedback" class="feedback-textarea" placeholder="edit-feedback">${test.feedback}</textarea>
+                    
+                    
                     ${test.missing_points ? `<p><strong>Missing Points:</strong> ${test.missing_points.join(", ")}</p>` : ''}
             `;
                 testResultsContainer.appendChild(section);
-            });
+            };
+            
+            
         });
 
     </script>
