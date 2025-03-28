@@ -305,46 +305,31 @@
     document.getElementById("testType").textContent = params.testType || 'N/A';
     document.getElementById("studentClass").textContent = params.studentClass || 'N/A';
 
-    // const saveFeedbackBtn = document.getElementById('save-feedback');
-    // const cancelBtn = document.getElementById('cancel');
+    const saveFeedbackBtn = document.getElementById('save-feedback');
+    const cancelBtn = document.getElementById('cancel');
 
-    // saveFeedbackBtn.addEventListener('click', function() {
-    //     const originalGrade = '6'; // This would come from backend in real scenario
-    //     const newGrade = document.getElementById('student-grade').value;
-    //     const feedback = document.getElementById('teacher-feedback').value;
+    saveFeedbackBtn.addEventListener('click', function() {
+        const newGrade = document.getElementById('student-grade').value;
+        const feedback = document.getElementById('teacher-feedback').value;
 
-    //     // Update original grade display
-    //     document.querySelector(".original-grade").innerText = `Original Grade: ${originalGrade}`;
+        // Basic validation
+        if (!feedback.trim()) {
+            alert('Please enter feedback');
+            return;
+        }
 
-    //     // Basic validation
-    //     if (!feedback) {
-    //         alert('Please enter feedback');
-    //         return;
-    //     }
+        // Simulating saving feedback
+        alert(`Feedback Saved Successfully!\nGrade: ${newGrade}\nFeedback: ${feedback}`);
 
-    //     // Prepare message to show changes
-    //     // let gradeChangeMessage = newGrade 
-    //     //     ? (newGrade !== originalGrade 
-    //     //         ? `Grade changed from ${originalGrade} to ${newGrade}` 
-    //     //         : 'No grade change')
-    //     //     : 'Grade remained ' + originalGrade;
+        // Disable editing after saving
+        document.getElementById('teacher-feedback').setAttribute('disabled', 'true');
+        document.getElementById('student-grade').setAttribute('disabled', 'true');
+        saveFeedbackBtn.setAttribute('disabled', 'true');
+    });
 
-    //     // Here you would typically send this data to a backend server
-    //     // For now, we'll just show an alert
-    //     alert('Feedback Saved Successfully!\n\n' + 
-    //           gradeChangeMessage + '\n' +
-    //           'Feedback: ' + feedback);
-
-    //     // Optional: Disable editing after submission
-    //     document.getElementById('teacher-feedback').setAttribute('disabled', true);
-    //     this.setAttribute('disabled', true);
-    // });
-
-    // cancelBtn.addEventListener('click', function() {
-    //     // Redirect to teacher dashboard or previous page
-    //     window.location.href = 'teacher.html';
-    // });
-
+    cancelBtn.addEventListener('click', function() {
+        window.location.href = 'teacher.html';
+    });
 
 });
 
