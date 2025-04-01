@@ -2,9 +2,9 @@
 
 // Simple toggle between login and dashboard for demo purposes
 document.getElementById('login-btn').addEventListener('click', function() {
-    // document.getElementById('login-page').style.display = 'none';
-    // document.getElementById('dashboard-page').style.display = 'block';
-    window.location.href='new.html';
+    document.getElementById('login-page').style.display = 'none';
+    document.getElementById('dashboard-page').style.display = 'block';
+    // window.location.href='new.html';
 });
 
 // Tab switching functionality
