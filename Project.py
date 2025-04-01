@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")  # Suppress warnings
 reader = easyocr.Reader(['en'])  # Load English OCR model
 
 # ✅ Step 2: Read text from image
-image_path = 'Numbersimg.jpg'  # Replace with your image path
+image_path = 'Testing2.jpg'  # Replace with your image path
 results = reader.readtext(image_path)
 
 # ✅ Extract text from OCR results
