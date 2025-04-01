@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Assist - Student Portal</title>
     <link rel="stylesheet" href="student.css">
+    
 </head>
 <body>
     <!-- Dynamic Background Elements -->
@@ -13,219 +14,244 @@
     <div class="circle circle3"></div>
     <div class="wave-bg"></div>
     
-    <header class="header">
-        <a href="#" class="logo">AI Assist</a>
+    <!-- Language Toggle Button -->
+   
+    
+    <!-- <header class="header">
+        <a href="#" class="logo" data-en="AI Assist" data-hi="एआई असिस्ट">AI Assist</a>
         <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="teacher.html">Teacher</a>
-            <a href="student.html">Student</a>
-            <a href="#">About</a>
-            <a href="#">Support</a>
+            <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+            <a href="teacher.html" data-en="Teacher" data-hi="शिक्षक">Teacher</a>
+            <a href="student.html" data-en="Student" data-hi="छात्र">Student</a>
+            <a href="#" data-en="About" data-hi="हमारे बारे में">About</a>
+            <a href="#" data-en="Support" data-hi="सहायता">Support</a>
         </nav>
+    </header> -->
+    <header class="header">
+        <a href="#" class="logo" data-en="AI Assist" data-hi="एआई असिस्ट">AI Assist</a>
+        <nav class="nav-links">
+            <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+            <a href="teacher.html" data-en="Teacher" data-hi="शिक्षक">Teacher</a>
+            <a href="student.html" data-en="Student" data-hi="छात्र">Student</a>
+            <a href="#" data-en="About" data-hi="हमारे बारे में">About</a>
+            <a href="#" data-en="Support" data-hi="सहायता">Support</a>
+        </nav>
+        <!-- Language Toggle Button in Header -->
+        <button id="languageToggle" class="language-btn" onclick="toggleLanguage()">हिंदी</button>
     </header>
     
     <div class="container">
         <!-- Student Login Page -->
         <div id="login-page" class="animated">
             <div class="hero">
-                <h1>Student Portal Access</h1>
-                <p>View your assignments, grades, and personalized feedback</p>
+                <h1 data-en="Student Portal Access" data-hi="छात्र पोर्टल एक्सेस">Student Portal Access</h1>
+                <p data-en="View your assignments, grades, and personalized feedback" 
+                   data-hi="अपने असाइनमेंट, ग्रेड और व्यक्तिगत फीडबैक देखें">
+                    View your assignments, grades, and personalized feedback
+                </p>
             </div>
             
             <div class="card login-form">
-                <h2 style="margin-bottom: 1.5rem; text-align: center;">Enter Student Information</h2>
+                <h2 style="margin-bottom: 1.5rem; text-align: center;" 
+                    data-en="Enter Student Information" 
+                    data-hi="छात्र जानकारी दर्ज करें">
+                    Enter Student Information
+                </h2>
                 
                 <div class="form-group">
-                    <label for="student-id">Student ID:</label>
-                    <input type="text" id="student-id" placeholder="Enter your student ID">
+                    <label for="student-id" data-en="Student ID:" data-hi="छात्र आईडी:">Student ID:</label>
+                    <input type="text" id="student-id" placeholder="Enter your student ID" data-en-placeholder="Enter your student ID" data-hi-placeholder="अपना छात्र आईडी दर्ज करें">
                 </div>
                 
                 <div class="form-group">
-                    <label for="class">Class:</label>
+                    <label for="class" data-en="Class:" data-hi="कक्षा:">Class:</label>
                     <select id="class">
-                        <option value="">Select your class</option>
-                        <option value="1">Class 6</option>
-                        <option value="2">Class 7</option>
-                        <option value="3">Class 8</option>
-                        <option value="4">Class 9</option>
-                        <option value="5">Class 10</option>
+                        <option value="" data-en="Select your class" data-hi="अपनी कक्षा चुनें">Select your class</option>
+                        <option value="1" data-en="Class 6" data-hi="कक्षा 6">Class 6</option>
+                        <option value="2" data-en="Class 7" data-hi="कक्षा 7">Class 7</option>
+                        <option value="3" data-en="Class 8" data-hi="कक्षा 8">Class 8</option>
+                        <option value="4" data-en="Class 9" data-hi="कक्षा 9">Class 9</option>
+                        <option value="5" data-en="Class 10" data-hi="कक्षा 10">Class 10</option>
                     </select>
                 </div>
                 
-                <button type="button" id="login-btn" class="btn" style="width: 100%;">Access Dashboard</button>
+                <button type="button" id="login-btn" class="btn" style="width: 100%;" 
+                        data-en="Access Dashboard" 
+                        data-hi="डैशबोर्ड एक्सेस करें">
+                    Access Dashboard
+                </button>
             </div>
         </div>
         
         <!-- Student Dashboard Page -->
         <div id="dashboard-page" class="dashboard animated">
             <div class="hero">
-                <h1>Welcome, Student!</h1>
-                <p>Track your progress, view assignments, and access feedback</p>
+                <h1 data-en="Welcome, Student!" data-hi="छात्र, आपका स्वागत है!">Welcome, Student!</h1>
+                <p data-en="Track your progress, view assignments, and access feedback" 
+                   data-hi="अपनी प्रगति ट्रैक करें, असाइनमेंट देखें और फीडबैक प्राप्त करें">
+                    Track your progress, view assignments, and access feedback
+                </p>
             </div>
             
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="number">87%</div>
-                    <div class="label">Average Score</div>
+                    <div class="label" data-en="Average Score" data-hi="औसत स्कोर">Average Score</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="number">12</div>
-                    <div class="label">Tests Completed</div>
+                    <div class="label" data-en="Tests Completed" data-hi="पूर्ण टेस्ट">Tests Completed</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="number">3</div>
-                    <div class="label">Pending Assignments</div>
+                    <div class="label" data-en="Pending Assignments" data-hi="लंबित असाइनमेंट">Pending Assignments</div>
                 </div>
                 
                 <div class="stat-card">
                     <div class="number">97%</div>
-                    <div class="label">Attendance</div>
+                    <div class="label" data-en="Attendance" data-hi="उपस्थिति">Attendance</div>
                 </div>
             </div>
             
             <!-- Feedback Section -->
             <div class="feedback-section">
-                <h2 style="margin-bottom: 1rem;">Feedback & Comments</h2>
+                <h2 style="margin-bottom: 1rem;" data-en="Feedback & Comments" data-hi="फीडबैक और टिप्पणियाँ">Feedback & Comments</h2>
                 
                 <div class="tabs">
-                    <div class="tab active" data-tab="recent">Recent Feedback</div>
-                    <div class="tab" data-tab="all">All Feedback</div>
+                    <div class="tab active" data-tab="recent" data-en="Recent Feedback" data-hi="हालिया फीडबैक">Recent Feedback</div>
+                    <div class="tab" data-tab="all" data-en="All Feedback" data-hi="सभी फीडबैक">All Feedback</div>
                 </div>
                 
                 <div class="feedback-container">
+                    <!-- Feedback Card 1 -->
                     <div class="feedback-card">
                         <div class="feedback-header">
-                            <div class="feedback-subject">
-                            Chemistry: Metals and Non-metals Class Test
-                         </div>
+                            <div class="feedback-subject" data-en="Chemistry: Metals and Non-metals Class Test" data-hi="रसायन विज्ञान: धातु और अधातु कक्षा परीक्षण">
+                                Chemistry: Metals and Non-metals Class Test
+                            </div>
                             <div class="feedback-date">6 April 2025</div>
                         </div>
                         
                         <div class="feedback-content">
-                            <p>You demonstrated good understanding of the scientific concepts covered this week.</p>
+                            <p data-en="You demonstrated good understanding of the scientific concepts covered this week." 
+                               data-hi="आपने इस सप्ताह के वैज्ञानिक अवधारणाओं की अच्छी समझ दिखाई।">
+                                You demonstrated good understanding of the scientific concepts covered this week.
+                            </p>
                             
-                            <div class="highlight">
+                            <div class="highlight" data-en="Score: 42/50 (A-) - Above class average" 
+                                 data-hi="स्कोर: 42/50 (ए-) - कक्षा औसत से ऊपर">
                                 Score: 42/50 (A-) - Above class average
                             </div>
                             
-                            <p><b>Areas of strength:</b></p>
+                            <p><b data-en="Areas of strength:" data-hi="मजबूत क्षेत्र:">Areas of strength:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Chemical Reactions of metals (100%)</li>
-                                <li>Uses and appliactions of metals and non-metals (94%)</li>
+                                <li data-en="Chemical Reactions of metals (100%)" data-hi="धातुओं की रासायनिक अभिक्रियाएं (100%)">Chemical Reactions of metals (100%)</li>
+                                <li data-en="Uses and applications of metals and non-metals (94%)" data-hi="धातु और अधातु का उपयोग और अनुप्रयोग (94%)">Uses and applications of metals and non-metals (94%)</li>
                             </ul>
                             
-                            <p><b>Areas for improvement:</b></p>
+                            <p><b data-en="Areas for improvement:" data-hi="सुधार के क्षेत्र:">Areas for improvement:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Properties of metals and non-metals(20%)</li>
+                                <li data-en="Properties of metals and non-metals (20%)" data-hi="धातु और अधातु के गुण (20%)">Properties of metals and non-metals (20%)</li>
                             </ul>
                             <div class="detailed-analysis">
-                                <a href="new.html" class="analysis-link">View Detailed Analysis →</a>
+                                <a href="new.html" class="analysis-link" data-en="View Detailed Analysis →" data-hi="विस्तृत विश्लेषण देखें →">View Detailed Analysis →</a>
                             </div>
-
                         </div>
                         
                         <div class="teacher-comment">
                             <div class="avatar">MP</div>
                             <div class="comment-content">
-                                <div class="teacher-name">Mrs. Priyanka</div>
-                                <div class="comment-text">
-                                    Your understanding of 'Chemical Reactions of Metals' and 'Uses and Applications of Metals & Non-Metals' is strong—this is evident from your confident responses in these areas. However, 'Metallurgy & Extraction of Metals' and 'Reactivity Series and Displacement Reactions' require further reinforcement. To improve, focus on practicing extraction methods and redox-based displacement reactions, as these are foundational concepts. Keep building on your strengths while dedicating targeted review to the remaining topics
+                                <div class="teacher-name" data-en="Mrs. Priyanka" data-hi="श्रीमती प्रियंका">Mrs. Priyanka</div>
+                                <div class="comment-text" 
+                                     data-en="Your understanding of 'Chemical Reactions of Metals' and 'Uses and Applications of Metals & Non-Metals' is strong—this is evident from your confident responses in these areas. However, 'Metallurgy & Extraction of Metals' and 'Reactivity Series and Displacement Reactions' require further reinforcement. To improve, focus on practicing extraction methods and redox-based displacement reactions, as these are foundational concepts. Keep building on your strengths while dedicating targeted review to the remaining topics."
+                                     data-hi="आपकी 'धातुओं की रासायनिक अभिक्रियाओं' और 'धातु एवं अधातु के उपयोग और अनुप्रयोग' की समझ मजबूत है - यह इन क्षेत्रों में आपके आत्मविश्वासपूर्ण उत्तरों से स्पष्ट है। हालांकि, 'धातुकर्म और धातु निष्कर्षण' और 'अभिक्रियाशीलता श्रृंखला और विस्थापन अभिक्रियाओं' को और मजबूत करने की आवश्यकता है। सुधार के लिए, निष्कर्षण विधियों और रेडॉक्स-आधारित विस्थापन अभिक्रियाओं का अभ्यास करने पर ध्यान दें, क्योंकि ये मूलभूत अवधारणाएं हैं। अपनी मजबूतियों को बनाए रखते हुए शेष विषयों को समय दें।">
+                                    Your understanding of 'Chemical Reactions of Metals' and 'Uses and Applications of Metals & Non-Metals' is strong—this is evident from your confident responses in these areas. However, 'Metallurgy & Extraction of Metals' and 'Reactivity Series and Displacement Reactions' require further reinforcement. To improve, focus on practicing extraction methods and redox-based displacement reactions, as these are foundational concepts. Keep building on your strengths while dedicating targeted review to the remaining topics.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Feedback Item 1 -->
+                    
+                    <!-- Feedback Card 2 -->
                     <div class="feedback-card">
                         <div class="feedback-header">
-                            <div class="feedback-subject">
-                                <div class="feedback-subject">Mathematics: Mid-Term Exam</div>
-                              </div>
+                            <div class="feedback-subject" data-en="Mathematics: Mid-Term Exam" data-hi="गणित: मध्यावधि परीक्षा">Mathematics: Mid-Term Exam</div>
                             <div class="feedback-date">1 April 2025</div>
-
                         </div>
                         
                         <div class="feedback-content">
-                            <p>Your overall performance was excellent. You demonstrated strong problem-solving skills and logical thinking.</p>
+                            <p data-en="Your overall performance was excellent. You demonstrated strong problem-solving skills and logical thinking." 
+                               data-hi="आपका समग्र प्रदर्शन उत्कृष्ट था। आपने मजबूत समस्या-समाधान कौशल और तार्किक सोच प्रदर्शित की।">
+                                Your overall performance was excellent. You demonstrated strong problem-solving skills and logical thinking.
+                            </p>
                             
-                            <div class="highlight">
+                            <div class="highlight" data-en="Score: 92/100 (A) - Top 10% of the class" 
+                                 data-hi="स्कोर: 92/100 (ए) - कक्षा के शीर्ष 10%">
                                 Score: 92/100 (A) - Top 10% of the class
                             </div>
                             
-                            <p><b>Areas of strength:</b></p>
+                            <p><b data-en="Areas of strength:" data-hi="मजबूत क्षेत्र:">Areas of strength:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Algebra equations (100%)</li>
-                                <li>Geometric proofs (95%)</li>
-                                <li>Word problems (90%)</li>
+                                <li data-en="Algebra equations (100%)" data-hi="बीजगणित समीकरण (100%)">Algebra equations (100%)</li>
+                                <li data-en="Geometric proofs (95%)" data-hi="ज्यामितीय प्रमाण (95%)">Geometric proofs (95%)</li>
+                                <li data-en="Word problems (90%)" data-hi="शब्द समस्याएं (90%)">Word problems (90%)</li>
                             </ul>
                             
-                            <p><b>Areas for improvement:</b></p>
+                            <p><b data-en="Areas for improvement:" data-hi="सुधार के क्षेत्र:">Areas for improvement:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Complex number operations (75%)</li>
+                                <li data-en="Complex number operations (75%)" data-hi="सम्मिश्र संख्या संक्रियाएं (75%)">Complex number operations (75%)</li>
                             </ul>
                         </div>
                         
                         <div class="teacher-comment">
                             <div class="avatar">MR</div>
                             <div class="comment-content">
-                                <div class="teacher-name">Ms. Reema <span class="ai-badge">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                                    </svg>
-                                   
-                                </span></div>
-                                <div class="comment-text">
+                                <div class="teacher-name" data-en="Ms. Reema" data-hi="सुश्री रीमा">Ms. Reema</div>
+                                <div class="comment-text" 
+                                     data-en="Excellent work! Your approach to the quadratic equations was particularly impressive. For the complex number operations, review the conjugate properties we discussed in class. I've added some additional practice problems to your portal that will help strengthen this area."
+                                     data-hi="उत्कृष्ट कार्य! द्विघात समीकरणों के प्रति आपका दृष्टिकोण विशेष रूप से प्रभावशाली था। सम्मिश्र संख्या संक्रियाओं के लिए, कक्षा में चर्चा किए गए संयुग्म गुणों की समीक्षा करें। मैंने आपके पोर्टल में कुछ अतिरिक्त अभ्यास समस्याएं जोड़ी हैं जो इस क्षेत्र को मजबूत करने में मदद करेंगी।">
                                     Excellent work! Your approach to the quadratic equations was particularly impressive. For the complex number operations, review the conjugate properties we discussed in class. I've added some additional practice problems to your portal that will help strengthen this area.
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Feedback Item 2 -->
-                    
-                    
-                    <!-- Feedback Item 3 -->
+                    <!-- Feedback Card 3 -->
                     <div class="feedback-card">
                         <div class="feedback-header">
-                            <div class="feedback-subject">History: Research Assignment</div>
+                            <div class="feedback-subject" data-en="History: Research Assignment" data-hi="इतिहास: शोध असाइनमेंट">History: Research Assignment</div>
                             <div class="feedback-date">16 Mar 2025</div>
                         </div>
                         
                         <div class="feedback-content">
-                            <p>Your research paper showed good effort and historical understanding.</p>
+                            <p data-en="Your research paper showed good effort and historical understanding." 
+                               data-hi="आपके शोध पत्र ने अच्छे प्रयास और ऐतिहासिक समझ को दर्शाया।">
+                                Your research paper showed good effort and historical understanding.
+                            </p>
                             
-                            <div class="highlight">
-                                Score: 88/100 (B+) 
-                            </div>
+                            <div class="highlight" data-en="Score: 88/100 (B+)" data-hi="स्कोर: 88/100 (बी+)">Score: 88/100 (B+)</div>
                             
-                            <p><b>Areas of strength:</b></p>
+                            <p><b data-en="Areas of strength:" data-hi="मजबूत क्षेत्र:">Areas of strength:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Primary source analysis</li>
-                                <li>Historical context</li>
+                                <li data-en="Primary source analysis" data-hi="प्राथमिक स्रोत विश्लेषण">Primary source analysis</li>
+                                <li data-en="Historical context" data-hi="ऐतिहासिक संदर्भ">Historical context</li>
                             </ul>
                             
-                            <p><b>Areas for improvement:</b></p>
+                            <p><b data-en="Areas for improvement:" data-hi="सुधार के क्षेत्र:">Areas for improvement:</b></p>
                             <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
-                                <li>Citation formatting</li>
-                                <li>Conclusion strength</li>
+                                <li data-en="Citation formatting" data-hi="उद्धरण स्वरूपण">Citation formatting</li>
+                                <li data-en="Conclusion strength" data-hi="निष्कर्ष की मजबूती">Conclusion strength</li>
                             </ul>
                         </div>
                         
                         <div class="teacher-comment">
                             <div class="avatar">DS</div>
                             <div class="comment-content">
-                                <div class="teacher-name">Dr. Sakshi <span class="ai-badge">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                                    </svg>
-                                   
-                                </span></div>
-                                <div class="comment-text">
+                                <div class="teacher-name" data-en="Dr. Sakshi" data-hi="डॉ. साक्षी">Dr. Sakshi</div>
+                                <div class="comment-text" 
+                                     data-en="You've done excellent research and your analysis of the historical documents was insightful. To improve, please review the MLA citation format in the study guide. Your conclusion could be strengthened by connecting your findings back to your thesis more explicitly. I've highlighted specific passages in your paper with suggestions."
+                                     data-hi="आपने उत्कृष्ट शोध किया है और ऐतिहासिक दस्तावेजों का आपका विश्लेषण गहन था। सुधार के लिए, कृपया अध्ययन गाइड में एमएलए उद्धरण प्रारूप की समीक्षा करें। अपने निष्कर्षों को अपने थीसिस से स्पष्ट रूप से जोड़कर आप अपने निष्कर्ष को मजबूत कर सकते हैं। मैंने सुझावों के साथ आपके पेपर में विशिष्ट अंशों को हाइलाइट किया है।">
                                     You've done excellent research and your analysis of the historical documents was insightful. To improve, please review the MLA citation format in the study guide. Your conclusion could be strengthened by connecting your findings back to your thesis more explicitly. I've highlighted specific passages in your paper with suggestions.
                                 </div>
                             </div>
@@ -235,52 +261,97 @@
             </div>
             
             <div class="recent-tests">
-                <h2 style="margin-bottom: 1rem;">Upcoming & Recent Assignments</h2>
+                <h2 style="margin-bottom: 1rem;" data-en="Upcoming & Recent Assignments" data-hi="आगामी और हालिया असाइनमेंट">Upcoming & Recent Assignments</h2>
                 
                 <table>
                     <thead>
                         <tr>
-                            <th>Assignment Name</th>
-                            <th>Subject</th>
-                            <th>Date</th>
-                            <th>Score</th>
-                            <th>Status</th>
+                            <th data-en="Assignment Name" data-hi="असाइनमेंट नाम">Assignment Name</th>
+                            <th data-en="Subject" data-hi="विषय">Subject</th>
+                            <th data-en="Date" data-hi="तारीख">Date</th>
+                            <th data-en="Score" data-hi="स्कोर">Score</th>
+                            <th data-en="Status" data-hi="स्थिति">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Mid-Term Exam</td>
-                            <td>Mathematics</td>
+                            <td data-en="Mid-Term Exam" data-hi="मध्यावधि परीक्षा">Mid-Term Exam</td>
+                            <td data-en="Mathematics" data-hi="गणित">Mathematics</td>
                             <td>20 Mar 2025</td>
                             <td>92/100</td>
-                            <td><span class="badge badge-success">Graded</span></td>
+                            <td><span class="badge badge-success" data-en="Graded" data-hi="ग्रेडेड">Graded</span></td>
                         </tr>
                         <tr>
-                            <td>Weekly Quiz</td>
-                            <td>Science</td>
+                            <td data-en="Weekly Quiz" data-hi="साप्ताहिक क्विज़">Weekly Quiz</td>
+                            <td data-en="Science" data-hi="विज्ञान">Science</td>
                             <td>18 Mar 2025</td>
                             <td>45/50</td>
-                            <td><span class="badge badge-success">Graded</span></td>
+                            <td><span class="badge badge-success" data-en="Graded" data-hi="ग्रेडेड">Graded</span></td>
                         </tr>
                         <tr>
-                            <td>Research Paper</td>
-                            <td>History</td>
+                            <td data-en="Research Paper" data-hi="शोध पत्र">Research Paper</td>
+                            <td data-en="History" data-hi="इतिहास">History</td>
                             <td>15 Mar 2025</td>
                             <td>88/100</td>
-                            <td><span class="badge badge-success">Graded</span></td>
+                            <td><span class="badge badge-success" data-en="Graded" data-hi="ग्रेडेड">Graded</span></td>
                         </tr>
                         <tr>
-                            <td>Final Assignment</td>
-                            <td>English</td>
+                            <td data-en="Final Assignment" data-hi="अंतिम असाइनमेंट">Final Assignment</td>
+                            <td data-en="English" data-hi="अंग्रेज़ी">English</td>
                             <td>22 Mar 2025</td>
                             <td>-</td>
-                            <td><span class="badge badge-danger">Due Tomorrow</span></td>
+                            <td><span class="badge badge-danger" data-en="Due Tomorrow" data-hi="कल समाप्त">Due Tomorrow</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <script>
+        // Language toggle functionality
+        let currentLanguage = 'en';
+        
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
+            updateLanguage();
+            document.getElementById('languageToggle').textContent = currentLanguage === 'en' ? 'हिंदी' : 'English';
+            
+            // Update input placeholders
+            const studentIdInput = document.getElementById('student-id');
+            if (studentIdInput) {
+                studentIdInput.placeholder = currentLanguage === 'en' 
+                    ? studentIdInput.getAttribute('data-en-placeholder')
+                    : studentIdInput.getAttribute('data-hi-placeholder');
+            }
+        }
+        
+        function updateLanguage() {
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en], [data-hi]').forEach(element => {
+                if (element.tagName === 'LI' || element.tagName === 'P' || element.tagName === 'H1' || 
+                    element.tagName === 'DIV' || element.tagName === 'TH' || element.tagName === 'TD' || 
+                    element.tagName === 'SPAN' || element.tagName === 'B' || element.tagName === 'A') {
+                    if (currentLanguage === 'en' && element.hasAttribute('data-en')) {
+                        element.innerHTML = element.getAttribute('data-en');
+                    } else if (currentLanguage === 'hi' && element.hasAttribute('data-hi')) {
+                        element.innerHTML = element.getAttribute('data-hi');
+                    }
+                } else {
+                    if (currentLanguage === 'en' && element.hasAttribute('data-en')) {
+                        element.textContent = element.getAttribute('data-en');
+                    } else if (currentLanguage === 'hi' && element.hasAttribute('data-hi')) {
+                        element.textContent = element.getAttribute('data-hi');
+                    }
+                }
+            });
+        }
+
+        // Initialize the page in English
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLanguage();
+        });
+    </script>
     <script src="student.js"></script>
 </body>
 </html>

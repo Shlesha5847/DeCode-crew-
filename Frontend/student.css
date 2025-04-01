@@ -9,6 +9,7 @@
         body {
             background-color: #f0f0ff;
         }
+
         
         .header {
             display: flex;
@@ -28,20 +29,22 @@
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+             transform: translateX(600px); 
         }
         
         .nav-links a {
             text-decoration: none;
             color: #333;
-            font-weight: 500;
+            font-weight: bold;
+            font-size:1.1rem;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-        }
+        } 
         
         .hero {
             background-color: #6d6dff;
@@ -406,3 +409,128 @@
             background-color: #e0e0e0;
             text-decoration: underline;
         }
+        .language-btn {
+            background: #6363F7;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn:hover {
+            background: #4f4fdf;
+            transform: translateY(-2px);
+        }
+        Key changes:
+        
+        Moved the button inside the <header> element
+        
+        Updated CSS to:
+        
+        Use flexbox for proper header layout
+        
+        Style the button to match your header design
+        
+        Add hover effects
+        
+        Removed fixed positioning since it's now part of the header flow
+        
+        Kept all functionality - the JavaScript remains exactly the same
+        
+        This creates a more integrated look while maintaining all translation capabilities. The button will now:
+        
+        Stay with the header on all screen sizes
+        
+        Maintain consistent spacing
+        
+        Match your site's color scheme
+        
+        Work exactly as before
+        
+        Would you like me to adjust the button size, color, or position further?
+        
+        image.png
+        PNG 18.72KB
+        i want the navbar to look like this , the tabs should be in side ,not center
+        Here's how to modify your navbar to match the reference image with left-aligned navigation tabs:
+        
+        html
+        Copy
+        <header class="header">
+            <div class="header-container">
+                <a href="#" class="logo">AI Assist</a>
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="teacher.html">Teacher</a>
+                    <a href="student.html">Student</a>
+                    <a href="#">About</a>
+                    <a href="#">Support</a>
+                </nav>
+                <!-- Language Toggle Button -->
+                <button id="languageToggle" class="language-btn" onclick="toggleLanguage()">हिंदी</button>
+            </div>
+        </header>
+        Run HTML
+        And the corresponding CSS:
+        
+        css
+        Copy
+        /* Header Styles */
+        .header {
+            background: white; /* or your preferred background */
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6363F7; /* Your brand color */
+            text-decoration: none;
+            margin-right: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #6363F7; /* Your brand color */
+        }
+        
+        /* Language Button */
+        .language-btn {
+            margin-left: auto; /* Pushes button to the right */
+            background: #6363F7;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover {
+            background: #4f4fdf;
+        }
+        

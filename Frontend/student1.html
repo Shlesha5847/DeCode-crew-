@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assist - Student Portal</title>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <!-- Dynamic Background Elements -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+    <div class="wave-bg"></div>
+    
+    <header class="header">
+        <a href="#" class="logo">AI Assist</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="student.html">Student</a>
+            <a href="#">About</a>
+            <a href="#">Support</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- Student Login Page -->
+        <div id="login-page" class="animated">
+            <div class="hero">
+                <h1>Student Portal Access</h1>
+                <p>View your assignments, grades, and personalized feedback</p>
+            </div>
+            
+            <div class="card login-form">
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">Enter Student Information</h2>
+                
+                <div class="form-group">
+                    <label for="student-id">Student ID:</label>
+                    <input type="text" id="student-id" placeholder="Enter your student ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="class">Class:</label>
+                    <select id="class">
+                        <option value="">Select your class</option>
+                        <option value="1">Class 6</option>
+                        <option value="2">Class 7</option>
+                        <option value="3">Class 8</option>
+                        <option value="4">Class 9</option>
+                        <option value="5">Class 10</option>
+                    </select>
+                </div>
+                
+                <button type="button" id="login-btn" class="btn" style="width: 100%;">Access Dashboard</button>
+            </div>
+        </div>
+        
+        <!-- Student Dashboard Page -->
+        <div id="dashboard-page" class="dashboard animated">
+            <div class="hero">
+                <h1>Welcome, Student!</h1>
+                <p>Track your progress, view assignments, and access feedback</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">87%</div>
+                    <div class="label">Average Score</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">12</div>
+                    <div class="label">Tests Completed</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">3</div>
+                    <div class="label">Pending Assignments</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="number">97%</div>
+                    <div class="label">Attendance</div>
+                </div>
+            </div>
+            
+            <!-- Feedback Section -->
+            <div class="feedback-section">
+                <h2 style="margin-bottom: 1rem;">Feedback & Comments</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="recent">Recent Feedback</div>
+                    <div class="tab" data-tab="all">All Feedback</div>
+                </div>
+                
+                <div class="feedback-container">
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="feedback-subject">
+                            Chemistry: Metals and Non-metals Class Test
+                         </div>
+                            <div class="feedback-date">6 April 2025</div>
+                        </div>
+                        
+                        <div class="feedback-content">
+                            <p>You demonstrated good understanding of the scientific concepts covered this week.</p>
+                            
+                            <div class="highlight">
+                                Score: 42/50 (A-) - Above class average
+                            </div>
+                            
+                            <p><b>Areas of strength:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Chemical Reactions of metals (100%)</li>
+                                <li>Uses and appliactions of metals and non-metals (94%)</li>
+                            </ul>
+                            
+                            <p><b>Areas for improvement:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Properties of metals and non-metals(20%)</li>
+                            </ul>
+                            <div class="detailed-analysis">
+                                <a href="new.html" class="analysis-link">View Detailed Analysis →</a>
+                            </div>
+
+                        </div>
+                        
+                        <div class="teacher-comment">
+                            <div class="avatar">MP</div>
+                            <div class="comment-content">
+                                <div class="teacher-name">Mrs. Priyanka</div>
+                                <div class="comment-text">
+                                    Your understanding of 'Chemical Reactions of Metals' and 'Uses and Applications of Metals & Non-Metals' is strong—this is evident from your confident responses in these areas. However, 'Metallurgy & Extraction of Metals' and 'Reactivity Series and Displacement Reactions' require further reinforcement. To improve, focus on practicing extraction methods and redox-based displacement reactions, as these are foundational concepts. Keep building on your strengths while dedicating targeted review to the remaining topics
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Feedback Item 1 -->
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="feedback-subject">
+                                <div class="feedback-subject">Mathematics: Mid-Term Exam</div>
+                              </div>
+                            <div class="feedback-date">1 April 2025</div>
+
+                        </div>
+                        
+                        <div class="feedback-content">
+                            <p>Your overall performance was excellent. You demonstrated strong problem-solving skills and logical thinking.</p>
+                            
+                            <div class="highlight">
+                                Score: 92/100 (A) - Top 10% of the class
+                            </div>
+                            
+                            <p><b>Areas of strength:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Algebra equations (100%)</li>
+                                <li>Geometric proofs (95%)</li>
+                                <li>Word problems (90%)</li>
+                            </ul>
+                            
+                            <p><b>Areas for improvement:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Complex number operations (75%)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="teacher-comment">
+                            <div class="avatar">MR</div>
+                            <div class="comment-content">
+                                <div class="teacher-name">Ms. Reema <span class="ai-badge">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                   
+                                </span></div>
+                                <div class="comment-text">
+                                    Excellent work! Your approach to the quadratic equations was particularly impressive. For the complex number operations, review the conjugate properties we discussed in class. I've added some additional practice problems to your portal that will help strengthen this area.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Feedback Item 2 -->
+                    
+                    
+                    <!-- Feedback Item 3 -->
+                    <div class="feedback-card">
+                        <div class="feedback-header">
+                            <div class="feedback-subject">History: Research Assignment</div>
+                            <div class="feedback-date">16 Mar 2025</div>
+                        </div>
+                        
+                        <div class="feedback-content">
+                            <p>Your research paper showed good effort and historical understanding.</p>
+                            
+                            <div class="highlight">
+                                Score: 88/100 (B+) 
+                            </div>
+                            
+                            <p><b>Areas of strength:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Primary source analysis</li>
+                                <li>Historical context</li>
+                            </ul>
+                            
+                            <p><b>Areas for improvement:</b></p>
+                            <ul style="padding-left: 1.5rem; margin: 0.5rem 0;">
+                                <li>Citation formatting</li>
+                                <li>Conclusion strength</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="teacher-comment">
+                            <div class="avatar">DS</div>
+                            <div class="comment-content">
+                                <div class="teacher-name">Dr. Sakshi <span class="ai-badge">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                   
+                                </span></div>
+                                <div class="comment-text">
+                                    You've done excellent research and your analysis of the historical documents was insightful. To improve, please review the MLA citation format in the study guide. Your conclusion could be strengthened by connecting your findings back to your thesis more explicitly. I've highlighted specific passages in your paper with suggestions.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-tests">
+                <h2 style="margin-bottom: 1rem;">Upcoming & Recent Assignments</h2>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Assignment Name</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Score</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mid-Term Exam</td>
+                            <td>Mathematics</td>
+                            <td>20 Mar 2025</td>
+                            <td>92/100</td>
+                            <td><span class="badge badge-success">Graded</span></td>
+                        </tr>
+                        <tr>
+                            <td>Weekly Quiz</td>
+                            <td>Science</td>
+                            <td>18 Mar 2025</td>
+                            <td>45/50</td>
+                            <td><span class="badge badge-success">Graded</span></td>
+                        </tr>
+                        <tr>
+                            <td>Research Paper</td>
+                            <td>History</td>
+                            <td>15 Mar 2025</td>
+                            <td>88/100</td>
+                            <td><span class="badge badge-success">Graded</span></td>
+                        </tr>
+                        <tr>
+                            <td>Final Assignment</td>
+                            <td>English</td>
+                            <td>22 Mar 2025</td>
+                            <td>-</td>
+                            <td><span class="badge badge-danger">Due Tomorrow</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="student.js"></script>
+</body>
+</html>
