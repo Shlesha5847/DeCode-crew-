@@ -27,13 +27,15 @@ body {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
+    transform: translateX(300px);
 }
 
 .nav-links a {
     text-decoration: none;
     color: #333;
-    font-weight: 500;
+    font-weight: bold;
+    
 }
 
 .container {
@@ -405,10 +407,22 @@ tr:hover {
     background-color: #e0e0e0;
     text-decoration: underline;
 }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    /* Your existing header styles */
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    /* Your existing nav styles */
+}
+
+/* Updated language button style for header */
 .language-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
     background: #6363F7;
     color: white;
     border: none;
@@ -416,6 +430,11 @@ tr:hover {
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+    background: #4f4fdf;
+    transform: translateY(-2px);
 }
