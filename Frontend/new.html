@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Progress - Metals & Non-Metals</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, rgb(247, 243, 255), rgb(224, 217, 255));
+        }
+        canvas {
+            max-width: 400px;
+            max-height: 300px;
+            margin: auto;
+            display: block;
+        }
+        .section {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .section-heading {
+            background: #6363F7;
+            color: white;
+            padding: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        .section-content {
+            background: white;
+            padding: 15px;
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .chart-box {
+            flex: 1;
+            min-width: 300px;
+        }
+        .language-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #6363F7;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body class="p-5">
+    
+    <!-- Language Toggle Button -->
+    <button id="languageToggle" class="language-btn" onclick="toggleLanguage()">हिंदी</button>
+    
+    <!-- Updated Welcome Section -->
+    <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800" data-en="Welcome, Student!" data-hi="छात्र, आपका स्वागत है!">
+            Welcome, Student!
+        </h1>
+        <p class="text-lg text-gray-600 mt-2" data-en="Track your progress and view detailed feedback" 
+           data-hi="अपनी प्रगति को ट्रैक करें और विस्तृत फीडबैक देखें">
+            Track your progress and view detailed feedback
+        </p>
+    </div>
+    
+    <!-- Marks, Percentage, Grade Section -->
+    <div class="flex justify-evenly mb-5">
+        <div class="section w-1/4">
+            <div class="section-heading" data-en="Marks Obtained" data-hi="प्राप्त अंक">Marks Obtained</div>
+            <div class="section-content text-center">
+                <p class="text-3xl font-bold">42/50</p>
+                <p class="text-sm text-gray-600" data-en="Great job! Keep working on weak areas to improve further." 
+                   data-hi="बहुत अच्छा! और सुधार के लिए कमजोर क्षेत्रों पर काम करते रहें।">
+                    Great job! Keep working on weak areas to improve further.
+                </p>
+            </div>
+        </div>
+        <div class="section w-1/4">
+            <div class="section-heading" data-en="Percentage" data-hi="प्रतिशत">Percentage</div>
+            <div class="section-content text-center">
+                <p class="text-3xl font-bold">84%</p>
+                <p class="text-sm text-gray-600" data-en="A strong score! Aim for 90%+ next time." 
+                   data-hi="एक मजबूत स्कोर! अगली बार 90%+ का लक्ष्य रखें।">
+                    A strong score! Aim for 90%+ next time.
+                </p>
+            </div>
+        </div>
+        <div class="section w-1/4">
+            <div class="section-heading" data-en="Grade" data-hi="ग्रेड">Grade</div>
+            <div class="section-content text-center">
+                <p class="text-3xl font-bold text-green-500">A</p>
+                <p class="text-sm text-gray-600" data-en="Excellent performance! Maintain consistency." 
+                   data-hi="उत्कृष्ट प्रदर्शन! निरंतरता बनाए रखें।">
+                    Excellent performance! Maintain consistency.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topics Covered -->
+    <div class="section">
+        <div class="section-heading" data-en="Topics asked in exam" data-hi="परीक्षा में पूछे गए विषय">Topics asked in exam</div>
+        <div class="section-content">
+            <ul class="list-disc pl-5">
+                <li data-en="Properties of Metals & Non-Metals" data-hi="धातु और अधातु के गुण">Properties of Metals & Non-Metals</li>
+                <li data-en="Reactivity Series and Displacement Reactions" data-hi="अभिक्रियाशीलता श्रृंखला और विस्थापन अभिक्रियाएं">Reactivity Series and Displacement Reactions</li>
+                <li data-en="Metallurgy & Extraction of Metals" data-hi="धातुकर्म और धातु निष्कर्षण">Metallurgy & Extraction of Metals</li>
+                <li data-en="Chemical Reactions of Metals with Acids and Bases" data-hi="अम्ल और क्षार के साथ धातुओं की रासायनिक अभिक्रियाएं">Chemical Reactions of Metals with Acids and Bases</li>
+                <li data-en="Uses and Applications of Various Metals & Non-Metals" data-hi="विभिन्न धातुओं और अधातुओं का उपयोग और अनुप्रयोग">Uses and Applications of Various Metals & Non-Metals</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Strengths & Weaknesses with Pie Chart -->
+    <div class="section text-center">
+        <div class="section-heading" data-en="Strengths & Weaknesses" data-hi="मजबूती और कमजोरियां">Strengths & Weaknesses</div>
+        <div class="section-content">
+            <p class="text-sm text-gray-600 mb-3" data-en="Strengths are indicated in a gradient of purple. The darker the color, the better your knowledge." 
+               data-hi="मजबूत क्षेत्रों को बैंगनी रंग के ग्रेडिएंट में दिखाया गया है। रंग जितना गहरा होगा, आपका ज्ञान उतना ही बेहतर होगा।">
+                Strengths are indicated in a gradient of purple. The darker the color, the better your knowledge.
+            </p>
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Areas to Focus On -->
+    <div class="section">
+        <div class="section-heading" data-en="Areas to Focus On" data-hi="ध्यान देने योग्य क्षेत्र">Areas to Focus On</div>
+        <div class="section-content">
+            <ul class="list-disc pl-5 text-red-500">
+                <li data-en="Reactivity of Alkali Metals with Water" data-hi="पानी के साथ क्षार धातुओं की अभिक्रियाशीलता">Reactivity of Alkali Metals with Water</li>
+                <li data-en="Reduction Process in Metallurgy" data-hi="धातुकर्म में अपचयन प्रक्रिया">Reduction Process in Metallurgy</li>
+                <li data-en="Differences Between Metals and Non-Metals in Terms of Conductivity" data-hi="चालकता के संदर्भ में धातुओं और अधातुओं के बीच अंतर">Differences Between Metals and Non-Metals in Terms of Conductivity</li>
+            </ul>
+            <p class="text-sm text-gray-600" data-en="These topics require further study and practice." 
+               data-hi="इन विषयों के लिए अधिक अध्ययन और अभ्यास की आवश्यकता है।">
+                These topics require further study and practice.
+            </p>
+        </div>
+    </div>
+
+    <!-- Combined Charts Section -->
+    <div class="chart-container">
+        <!-- Performance Comparison Graph -->
+        <div class="section chart-box">
+            <div class="section-heading" data-en="Performance Comparison" data-hi="प्रदर्शन तुलना">Performance Comparison</div>
+            <div class="section-content">
+                <canvas id="comparisonChart"></canvas>
+                <div class="text-left mt-4 px-4">
+                    <p class="text-sm text-gray-700 mb-2" data-en="<span class='font-bold text-blue-600'>Your score (42/50)</span> beats the class average (38/50), but you lost <span class='font-bold text-red-500'>6 marks</span> to the topper (48/50). <span class='font-bold'>Key gap:</span> Questions on <span class='underline'>reactivity series (e.g., why K > Na > Li in H₂O reactions)</span> and <span class='underline'>reduction methods in metallurgy (blast furnace vs. electrolysis)</span>." 
+                       data-hi="<span class='font-bold text-blue-600'>आपका स्कोर (42/50)</span> कक्षा के औसत (38/50) से बेहतर है, लेकिन आपने टॉपर (48/50) से <span class='font-bold text-red-500'>6 अंक</span> खो दिए। <span class='font-bold'>मुख्य अंतर:</span> <span class='underline'>अभिक्रियाशीलता श्रृंखला (जैसे, H₂O अभिक्रियाओं में K > Na > Li क्यों)</span> और <span class='underline'>धातुकर्म में अपचयन विधियाँ (ब्लास्ट फर्नेस बनाम इलेक्ट्रोलिसिस)</span> पर प्रश्न।">
+                        <span class="font-bold text-blue-600">Your score (42/50)</span> beats the class average (38/50), 
+                        but you lost <span class="font-bold text-red-500">6 marks</span> to the topper (48/50). 
+                        <span class="font-bold">Key gap:</span> Questions on <span class="underline">reactivity series (e.g., why K > Na > Li in H₂O reactions)</span> and 
+                        <span class="underline">reduction methods in metallurgy (blast furnace vs. electrolysis)</span>.
+                    </p>
+                    <p class="text-sm text-gray-700" data-en="<span class='font-bold'>Action:</span> Revise the <span class='font-bold'>activity series</span> and <span class='font-bold'>oxidizing agents (C, CO, H₂)</span> used in metal extraction. These alone accounted for 4/6 missing marks." 
+                       data-hi="<span class='font-bold'>कार्रवाई:</span> <span class='font-bold'>गतिविधि श्रृंखला</span> और धातु निष्कर्षण में उपयोग किए जाने वाले <span class='font-bold'>ऑक्सीकरण करने वाले एजेंटों (C, CO, H₂)</span> को दोहराएं। इन्हीं के कारण आपने 4/6 अंक खो दिए।">
+                        <span class="font-bold">Action:</span> Revise the <span class="font-bold">activity series</span> and 
+                        <span class="font-bold">oxidizing agents (C, CO, H₂)</span> used in metal extraction. 
+                        These alone accounted for 4/6 missing marks.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tracking Report -->
+        <div class="section chart-box">
+            <div class="section-heading" data-en="Progress Tracking Report" data-hi="प्रगति ट्रैकिंग रिपोर्ट">Progress Tracking Report</div>
+            <div class="section-content">
+                <canvas id="progressChart"></canvas>
+                <div class="text-left mt-4 px-4">
+                    <p class="text-sm text-gray-700 mb-2" data-en="<span class='font-bold text-blue-600'>Net improvement: +7 marks</span> over 4 tests. The <span class='font-bold text-red-500'>dip in Test 3 (39/50)</span> correlated with <span class='underline'>misapplying Fajan's Rules (ionic vs. covalent character in metal compounds)</span> and <span class='underline'>alloy compositions (e.g., brass = Cu + Zn)</span>." 
+                       data-hi="<span class='font-bold text-blue-600'>कुल सुधार: 4 टेस्ट में +7 अंक</span>। <span class='font-bold text-red-500'>टेस्ट 3 में गिरावट (39/50)</span> <span class='underline'>फजान के नियमों को गलत तरीके से लागू करने (धातु यौगिकों में आयनिक बनाम सहसंयोजक चरित्र)</span> और <span class='underline'>मिश्र धातु संरचना (जैसे, पीतल = Cu + Zn)</span> से संबंधित थी।">
+                        <span class="font-bold text-blue-600">Net improvement: +7 marks</span> over 4 tests. 
+                        The <span class="font-bold text-red-500">dip in Test 3 (39/50)</span> correlated with 
+                        <span class="underline">misapplying Fajan's Rules (ionic vs. covalent character in metal compounds)</span> 
+                        and <span class="underline">alloy compositions (e.g., brass = Cu + Zn)</span>.
+                    </p>
+                    <p class="text-sm text-gray-700" data-en="<span class='font-bold'>Why it matters:</span> These concepts recur in 30% of exam questions. Focus on <span class='font-bold'>periodic trends (electronegativity, atomic radius)</span> to lock in gains." 
+                       data-hi="<span class='font-bold'>यह महत्वपूर्ण क्यों है:</span> ये अवधारणाएं 30% परीक्षा प्रश्नों में आती हैं। लाभ को स्थिर करने के लिए <span class='font-bold'>आवर्ती प्रवृत्तियों (विद्युतऋणात्मकता, परमाणु त्रिज्या)</span> पर ध्यान दें।">
+                        <span class="font-bold">Why it matters:</span> These concepts recur in 30% of exam questions. 
+                        Focus on <span class="font-bold">periodic trends (electronegativity, atomic radius)</span> to lock in gains.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language toggle functionality
+        let currentLanguage = 'en';
+        
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
+            updateLanguage();
+            document.getElementById('languageToggle').textContent = currentLanguage === 'en' ? 'हिंदी' : 'English';
+        }
+        
+        function updateLanguage() {
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en], [data-hi]').forEach(element => {
+                if (element.tagName === 'LI' || element.tagName === 'P' || element.tagName === 'H1' || element.tagName === 'DIV') {
+                    if (currentLanguage === 'en' && element.hasAttribute('data-en')) {
+                        element.innerHTML = element.getAttribute('data-en');
+                    } else if (currentLanguage === 'hi' && element.hasAttribute('data-hi')) {
+                        element.innerHTML = element.getAttribute('data-hi');
+                    }
+                } else {
+                    if (currentLanguage === 'en' && element.hasAttribute('data-en')) {
+                        element.textContent = element.getAttribute('data-en');
+                    } else if (currentLanguage === 'hi' && element.hasAttribute('data-hi')) {
+                        element.textContent = element.getAttribute('data-hi');
+                    }
+                }
+            });
+        }
+
+        // Pie Chart for Strengths & Weaknesses
+        new Chart(document.getElementById("pieChart"), {
+            type: 'pie',
+            data: {
+                labels: ["Properties of Metals & Non-Metals", 
+                         "Reactivity Series and Displacement Reactions", 
+                         "Metallurgy & Extraction of Metals", 
+                         "Chemical Reactions of Metals", 
+                         "Uses and Applications of Metals & Non-Metals"],
+                datasets: [{
+                    data: [60, 40, 70, 30, 50], // percentages for each topic
+                    backgroundColor: [
+                        'rgb(168, 112, 255)', // light purple for 60%
+                        'rgb(129, 73, 255)', // medium purple for 40%
+                        'rgb(96, 49, 255)',  // darker purple for 70%
+                        'rgb(52, 27, 153)',  // very dark purple for 30%
+                        'rgb(119, 75, 204)'  // medium purple for 50%
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Bar Chart for Performance Comparison
+        new Chart(document.getElementById("comparisonChart"), {
+            type: 'bar',
+            data: {
+                labels: ["Your Score", "Class Average", "Topper", "Lowest Score"],
+                datasets: [{
+                    label: "Marks",
+                    data: [42, 38, 48, 25],
+                    backgroundColor: ["blue", "gray", "green", "red"]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Line Chart for Progress Tracking
+        new Chart(document.getElementById("progressChart"), {
+            type: 'line',
+            data: {
+                labels: ["Test 1", "Test 2", "Test 3", "Current Test"],
+                datasets: [{
+                    label: "Your Score Over Time",
+                    data: [35, 40, 39, 42],
+                    borderColor: "blue",
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>

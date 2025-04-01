@@ -26,38 +26,61 @@
             line-height: 1.6;
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 15px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
 
-        .logo {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6363F7;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #6363F7;
+}
+.language-item {
+            margin-left: auto;
+        }
+        .lang-toggle {
+            background: rgba(74, 0, 224, 0.8);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            margin-left: 20px;
         }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
+        .lang-toggle:hover {
+            background: #4a00e0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
         }
-
         .container {
             max-width: 800px;
             margin: 2rem auto;
@@ -221,14 +244,29 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <a href="#" class="logo">AI Assist</a>
-        <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="teacher.html">Teacher</a>
-            <a href="student.html">Student</a>
-            <a href="#">About</a>
-            <a href="#">Support</a>
+    <header>
+        <h1 class="logo" data-key="logo">AI Assist</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" data-key="home">Home</a></li>
+                <li><a href="teacher.html" data-key="teacher">Teacher</a></li>
+                <li><a href="student.html" data-key="student">Student</a></li>
+                <li><a href="#" data-key="about">About</a></li>
+                <li><a href="support.html" data-key="support">Support</a></li>
+                <li class="language-item">
+                    <button id="languageButton" onclick="translatePage('en')" class="lang-toggle">English</button>
+                </li>
+                <li class="language-item">
+                    <button id="languageButton" onclick="translatePage('hi')" class="lang-toggle">हिन्दी</button>
+                </li>
+                <div id="google_translate_element" ></div>
+      <script src="https://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+      <script>
+        function loadGoogleTranslate(){
+          new google.translate.TranslateElement("google_translate_element");
+        }
+      </script>
+            </ul>
         </nav>
     </header>
 
@@ -339,25 +377,38 @@
             //alert(str);
 
             const testResults = {
-                "mcq": {
-                    "score": "8/10",
-                    "feedback": "You got 8 correct out of 10. Review question 3 and 7."
-                },
-                "fill_ups": {
-                    "score": "7/10",
-                    "feedback": "You missed 3 blanks. Check your spelling for blank 2."
-                },
-                "one_word": {
-                    "score": "9/10",
-                    "feedback": "Only one mistake. Great job!"
-                },
-                "q_a": {
-                    "similarity_percentage": "85%",
-                    "grade": "8/10",
-                    "feedback": "Your answer is mostly correct but lacks explanation.",
-                    "missing_points": ["Detailed explanation of stack usage"]
-                }
-            };
+    "mcq": {
+        "score": "8/10",
+        "feedback": "The student did the following 2 questions wrong: \n" +
+            "1) Which of the following non-metals are good conductor of electricity?\n" +
+            "Student answer: sulfur\n" +
+            "Correct answer: graphite\n" +
+            "2) Which property makes metals suitable for being drawn into wires?\n" +
+            "Student answer: malleability\n" +
+            "Correct answer: ductility"
+    },
+    "fill_ups": {
+        "score": "9/10",
+        "feedback": "Student did one question wrong:\n" +
+            "_______ is the only metal which is liquid at room temperature.\n" +
+            "Student answer: bromine\n" +
+            "Correct answer: Mercury"
+    },
+    "one_word": {
+        "score": "9/10",
+        "feedback": "Student did one question wrong:\n" +
+            "Question: Most malleable and ductile metal?\n" +
+            "Student answer: silver\n" +
+            "Correct answer: gold"
+    },
+    "q_a": {
+        "similarity_percentage": "60%",
+        "grade": "B+",
+        "feedback": "Question: Why do metals conduct electricity, whereas most non-metals do not?\n" +
+            "Student answer: Metals conduct electricity because they have more electrons than non-metals, which allows them to transfer charge. Non-metals do not conduct because they have fewer electrons\n" +
+            "Correct answer: The number of electrons is not the key factor; rather, it is the presence of free-moving (delocalized) electrons in the metal lattice"
+    }
+};
 
             const testResultsContainer = document.getElementById("test-results");
             if(testResults[str]){
@@ -378,7 +429,43 @@
             
             
         });
+        function translatePage(language) {
+  const translateElementId = "google_translate_element";
 
+  if (!document.getElementById(translateElementId)) {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://translate.google.com/translate_a/element.js?cb=initializeGoogleTranslate`;
+      script.id = translateElementId;
+      document.body.appendChild(script);
+  } else {
+      performTranslation(language);
+  }
+
+  window.initializeGoogleTranslate = function () {
+      new google.translate.TranslateElement(
+          {
+              pageLanguage: "en",
+              includedLanguages: "en,hi", 
+              autoDisplay: false,
+          },
+          translateElementId
+      );
+      performTranslation(language);
+  };
+}
+
+function performTranslation(language) {
+  const iframe = document.querySelector("iframe.goog-te-banner-frame");
+  if (iframe) iframe.style.display = "none";
+  const select = document.querySelector(
+      ".goog-te-combo" 
+  );
+  if (select) {
+      select.value = language;
+      select.dispatchEvent(new Event("change"));
+  }
+}
     </script>
 </body>
 </html>
