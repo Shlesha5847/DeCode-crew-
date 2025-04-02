@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdTech Assistant - Learning Path</title>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+        :root {
+            --primary-color: #6363F7;
+            --secondary-color: #f0f2ff;
+            --accent-color: #ff7b00;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --background-color: #e6e6fa; /* Matching the lavender background */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .navbar {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .navbar .logo {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 30px 0;
+            color: #6363F7;
+            font-weight: bold;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid #eaecef;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #6363F7;
+        }
+        
+        .card-title .material-icons {
+            margin-right: 10px;
+            color: #6363F7;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-control {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        
+        .form-control label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        
+        .form-control select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-control select:focus {
+            outline: none;
+            border-color: #6363F7;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #6363F7;
+            color: white;
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background-color: #6363F7;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(37, 99, 235, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #6363F7;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #6363F7;
+        }
+        
+        .path-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .path-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .path-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .path-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #eaecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .path-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .path-header {
+            background-color: #6363F7;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .path-header h3 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+        }
+        
+        .path-content {
+            padding: 20px;
+            flex-grow: 1;
+            background-color: white;
+        }
+        
+        .path-content h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: #6363F7;
+        }
+        
+        .path-content p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 0;
+            background-color: white;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            color: #6b7280;
+            transition: color 0.3s;
+        }
+        
+        .tab .material-icons {
+            margin-right: 8px;
+        }
+        
+        .tab:hover {
+            color: #6363F7;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #6363F7;
+            color: #6363F7;
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            padding: 25px;
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .resource-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            border: 1px solid #eaecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        
+        .resource-content {
+            padding: 20px;
+            flex-grow: 1;
+            background-color: white;
+        }
+        
+        .resource-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #6363F7;
+        }
+        
+        .resource-content p {
+            color: #6b7280;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .resource-btn {
+            padding: 8px 16px;
+            background-color: white;
+            color: #6363F7;
+            border: 1px solid #6363F7;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .resource-btn:hover {
+            background-color: #6363F7;
+            color: white;
+        }
+        
+        .powered-by {
+            text-align: center;
+            font-style: italic;
+            color: #6b7280;
+            margin: 30px 0;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            background-color: #6363F7;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">AI Assist</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="teacher.html">Teacher</a>
+            <a href="student.html">Student</a>
+            <a href="#">About</a>
+            <a href="support.html">Support</a>
+            <a href="query_portal.html" data-key="Query">Query</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Learning Path</h1>
+        
+        <!-- Selection Form -->
+        <div class="card">
+            <div class="card-content">
+                <h3 class="card-title">
+                    <span class="material-icons">school</span>
+                    Select Your Learning Track
+                </h3>
+                
+                <div class="form-grid">
+                    <div class="form-control">
+                        <label for="class-select">Class</label>
+                        <select id="class-select">
+                            <option value="">Select Class</option>
+                            <option value="Class 6">Class 6</option>
+                            <option value="Class 7">Class 7</option>
+                            <option value="Class 8">Class 8</option>
+                            <option value="Class 9">Class 9</option>
+                            <option value="Class 10">Class 10</option>
+                            <option value="Class 11">Class 11</option>
+                            <option value="Class 12">Class 12</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label for="subject-select">Subject</label>
+                        <select id="subject-select" disabled>
+                            <option value="">Select Subject</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label for="topic-select">Topic</label>
+                        <select id="topic-select" disabled>
+                            <option value="">Select Topic</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="generate-btn" class="btn btn-primary" disabled>Generate Learning Path</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+        </div>
+        
+        <!-- Learning Path Section -->
+        <div id="learning-path-section" class="hidden">
+            <h2>Learning Path for <span id="selected-topic-display"></span></h2>
+            
+            <div id="path-grid" class="path-grid">
+                <!-- Path cards will be generated here -->
+            </div>
+            
+            <!-- Learning Resources Section -->
+            <h2>Learning Resources</h2>
+            
+            <div class="tabs">
+                <button class="tab active" data-tab="visual">
+                    <span class="material-icons">videocam</span>
+                    Visual Learning
+                </button>
+                <button class="tab" data-tab="audio">
+                    <span class="material-icons">headphones</span>
+                    Audio Learning
+                </button>
+                <button class="tab" data-tab="documentation">
+                    <span class="material-icons">menu_book</span>
+                    Documentation
+                </button>
+            </div>
+            
+            <div class="tab-content">
+                <div id="visual-tab" class="resources-grid">
+                    <!-- Resources will be added here -->
+                </div>
+                
+                <div id="audio-tab" class="resources-grid hidden">
+                    <!-- Resources will be added here -->
+                </div>
+                
+                <div id="documentation-tab" class="resources-grid hidden">
+                    <!-- Resources will be added here -->
+                </div>
+            </div>
+            
+            <div class="powered-by">
+                Resources powered by Gemini AI API
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 EdTech Assistant. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Data structures
+        const subjects = {
+            'Class 6': ['Mathematics', 'Science', 'English', 'Social Studies'],
+            'Class 7': ['Mathematics', 'Science', 'English', 'Social Studies'],
+            'Class 8': ['Mathematics', 'Science', 'English', 'Social Studies'],
+            'Class 9': ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'History', 'Geography'],
+            'Class 10': ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'English', 'History', 'Geography'],
+            'Class 11': ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Computer Science', 'Economics'],
+            'Class 12': ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'Computer Science', 'Economics'],
+        };
+          
+        const topics = {
+            'Mathematics': ['Algebra', 'Geometry', 'Calculus', 'Statistics', 'Trigonometry'],
+            'Physics': ['Mechanics', 'Thermodynamics', 'Electricity', 'Optics', 'Modern Physics'],
+            'Chemistry': ['Periodic Table', 'Organic Chemistry', 'Inorganic Chemistry', 'Physical Chemistry'],
+            'Biology': ['Cell Biology', 'Genetics', 'Ecology', 'Human Physiology', 'Evolution'],
+            'Computer Science': ['Programming Basics', 'Data Structures', 'Algorithms', 'Web Development', 'Databases'],
+            'English': ['Grammar', 'Literature', 'Writing', 'Comprehension'],
+            'Economics': ['Microeconomics', 'Macroeconomics', 'International Economics', 'Development Economics'],
+            'Social Studies': ['History', 'Civics', 'Geography', 'Economics'],
+            'History': ['Ancient History', 'Medieval History', 'Modern History', 'World History'],
+            'Geography': ['Physical Geography', 'Human Geography', 'Climate', 'Natural Resources'],
+        };
+        
+        // DOM elements
+        const classSelect = document.getElementById('class-select');
+        const subjectSelect = document.getElementById('subject-select');
+        const topicSelect = document.getElementById('topic-select');
+        const generateBtn = document.getElementById('generate-btn');
+        const loadingDiv = document.getElementById('loading');
+        const learningPathSection = document.getElementById('learning-path-section');
+        const selectedTopicDisplay = document.getElementById('selected-topic-display');
+        const pathGrid = document.getElementById('path-grid');
+        const tabBtns = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.resources-grid');
+        
+        // Initialize the selects with data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Pre-populate the class select
+            classSelect.innerHTML = '<option value="">Select Class</option>';
+            Object.keys(subjects).forEach(className => {
+                const option = document.createElement('option');
+                option.value = className;
+                option.textContent = className;
+                classSelect.appendChild(option);
+            });
+        });
+        
+        // Event listeners
+        classSelect.addEventListener('change', handleClassChange);
+        subjectSelect.addEventListener('change', handleSubjectChange);
+        topicSelect.addEventListener('change', handleTopicChange);
+        generateBtn.addEventListener('click', fetchLearningPath);
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active tab button
+                tabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding tab content
+                const tabName = this.getAttribute('data-tab');
+                tabContents.forEach(content => content.classList.add('hidden'));
+                document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+            });
+        });
+        
+        // Functions
+        function handleClassChange() {
+            const selectedClass = classSelect.value;
+            
+            // Clear and reset subject select
+            subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+            topicSelect.innerHTML = '<option value="">Select Topic</option>';
+            
+            if (selectedClass && subjects[selectedClass]) {
+                // Populate subject dropdown with the subjects for the selected class
+                subjects[selectedClass].forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject;
+                    option.textContent = subject;
+                    subjectSelect.appendChild(option);
+                });
+                
+                subjectSelect.disabled = false;
+            } else {
+                subjectSelect.disabled = true;
+            }
+            
+            topicSelect.disabled = true;
+            generateBtn.disabled = true;
+            hideResults();
+        }
+        
+        function handleSubjectChange() {
+            const selectedSubject = subjectSelect.value;
+            
+            // Clear and reset topic select
+            topicSelect.innerHTML = '<option value="">Select Topic</option>';
+            
+            if (selectedSubject && topics[selectedSubject]) {
+                // Populate topic dropdown with the topics for the selected subject
+                topics[selectedSubject].forEach(topic => {
+                    const option = document.createElement('option');
+                    option.value = topic;
+                    option.textContent = topic;
+                    topicSelect.appendChild(option);
+                });
+                
+                topicSelect.disabled = false;
+            } else {
+                topicSelect.disabled = true;
+            }
+            
+            generateBtn.disabled = true;
+            hideResults();
+        }
+        
+        function handleTopicChange() {
+            const selectedTopic = topicSelect.value;
+            generateBtn.disabled = !selectedTopic;
+            hideResults();
+        }
+        
+        function hideResults() {
+            learningPathSection.classList.add('hidden');
+        }
+        
+        async function fetchLearningPath() {
+            const selectedClass = classSelect.value;
+            const selectedSubject = subjectSelect.value;
+            const selectedTopic = topicSelect.value;
+            
+            if (!selectedClass || !selectedSubject || !selectedTopic) return;
+            
+            loadingDiv.classList.remove('hidden');
+            hideResults();
+            
+            try {
+                // Call the API to get learning resources
+                const resources = await fetchResourcesFromGemini(selectedClass, selectedSubject, selectedTopic);
+                
+                // Create learning path structure
+                const learningPath = [
+                    { id: 1, title: 'Introduction to ' + selectedTopic, description: 'Basic concepts and fundamentals', duration: '2 hours' },
+                    { id: 2, title: 'Core principles of ' + selectedTopic, description: 'Deep dive into the key principles', duration: '3 hours' },
+                    { id: 3, title: 'Advanced ' + selectedTopic, description: 'Advanced concepts and applications', duration: '4 hours' },
+                    { id: 4, title: 'Practice and Mastery', description: 'Practice exercises and problem-solving techniques', duration: '5 hours' }
+                ];
+                
+                // Display results
+                renderLearningPath(learningPath, selectedTopic);
+                renderResources(resources);
+                
+                loadingDiv.classList.add('hidden');
+                learningPathSection.classList.remove('hidden');
+            } catch (error) {
+                console.error('Error fetching resources:', error);
+                alert('An error occurred while fetching resources. Please try again later.');
+                loadingDiv.classList.add('hidden');
+            }
+        }
+        
+        function renderLearningPath(path, selectedTopic) {
+            selectedTopicDisplay.textContent = selectedTopic;
+            pathGrid.innerHTML = '';
+            
+            path.forEach((step, index) => {
+                const stepElement = document.createElement('div');
+                stepElement.className = 'path-card';
+                stepElement.innerHTML = `
+                    <div class="path-header">
+                        <h3>Step ${index + 1}</h3>
+                        <p>${step.duration}</p>
+                    </div>
+                    <div class="path-content">
+                        <h4>${step.title}</h4>
+                        <p>${step.description}</p>
+                    </div>
+                `;
+                pathGrid.appendChild(stepElement);
+            });
+        }
+        
+        function renderResources(resources) {
+            // Clear all resource tabs
+            document.getElementById('visual-tab').innerHTML = '';
+            document.getElementById('audio-tab').innerHTML = '';
+            document.getElementById('documentation-tab').innerHTML = '';
+            
+            // Render resources for each tab
+            renderResourcesForTab('visual-tab', resources.visual);
+            renderResourcesForTab('audio-tab', resources.audio);
+            renderResourcesForTab('documentation-tab', resources.documentation);
+        }
+        
+        function renderResourcesForTab(tabId, resourceList) {
+            const tabElement = document.getElementById(tabId);
+            
+            resourceList.forEach((resource) => {
+                const resourceElement = document.createElement('div');
+                resourceElement.className = 'resource-card';
+                resourceElement.innerHTML = `
+                    <div class="resource-content">
+                        <h4>${resource.title}</h4>
+                        <p>Source: ${resource.source}</p>
+                        <a href="${resource.url}" class="resource-btn" target="_blank" rel="noopener noreferrer">
+                            Open Resource
+                        </a>
+                    </div>
+                `;
+                tabElement.appendChild(resourceElement);
+            });
+        }
+        
+        // API integration with Gemini
+        async function fetchResourcesFromGemini(className, subject, topic) {
+            try {
+                // Replace this URL with your actual Gemini API endpoint
+                const apiUrl = 'https://api.gemini.ai/v1/resources';
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer YOUR_API_KEY' // Replace with your actual API key
+                    },
+                    body: JSON.stringify({
+                        class: className,
+                        subject: subject,
+                        topic: topic,
+                        resourceTypes: ['visual', 'audio', 'documentation']
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch resources from API');
+                }
+                
+                const data = await response.json();
+                return data;
+                
+                // Fallback to mock data if API call fails or for testing
+                // Comment this out when the real API is working
+                /* return {
+                    visual: [
+                        { title: 'Visual Learning for ' + topic, url: 'https://www.youtube.com/results?search_query=' + topic + '+tutorial', source: 'YouTube' },
+                        { title: 'Interactive ' + topic + ' Visualization', url: 'https://www.khanacademy.org/search?query=' + topic, source: 'Khan Academy' },
+                        { title: topic + ' Explained Visually', url: 'https://www.coursera.org/search?query=' + topic, source: 'Coursera' }
+                    ],
+                    audio: [
+                        { title: topic + ' Audio Lectures', url: 'https://podcasts.google.com/search/' + topic, source: 'Google Podcasts' },
+                        { title: topic + ' Discussions', url: 'https://open.spotify.com/search/' + topic, source: 'Spotify' },
+                        { title: 'Learn ' + topic + ' on the Go', url: 'https://www.audible.com/search?keywords=' + topic, source: 'Audible' }
+                    ],
+                    documentation: [
+                        { title: 'Comprehensive Guide to ' + topic, url: 'https://en.wikipedia.org/wiki/' + topic, source: 'Wikipedia' },
+                        { title: topic + ' Study Materials', url: 'https://www.scribd.com/search?query=' + topic, source: 'Scribd' },
+                        { title: topic + ' E-books and Resources', url: 'https://www.pdfdrive.com/search?q=' + topic, source: 'PDF Drive' }
+                    ]
+                }; */
+            } catch (error) {
+                console.error('Error in API call:', error);
+                
+                // Fallback to mock data if API fails
+                return {
+                    visual: [
+                        { title: 'Visual Learning for ' + topic, url: 'https://www.youtube.com/results?search_query=' + topic + '+tutorial', source: 'YouTube' },
+                        { title: 'Interactive ' + topic + ' Visualization', url: 'https://www.khanacademy.org/search?query=' + topic, source: 'Khan Academy' },
+                        { title: topic + ' Explained Visually', url: 'https://www.coursera.org/search?query=' + topic, source: 'Coursera' }
+                    ],
+                    audio: [
+                        { title: topic + ' Audio Lectures', url: 'https://podcasts.google.com/search/' + topic, source: 'Google Podcasts' },
+                        { title: topic + ' Discussions', url: 'https://open.spotify.com/search/' + topic, source: 'Spotify' },
+                        { title: 'Learn ' + topic + ' on the Go', url: 'https://www.audible.com/search?keywords=' + topic, source: 'Audible' }
+                    ],
+                    documentation: [
+                        { title: 'Comprehensive Guide to ' + topic, url: 'https://en.wikipedia.org/wiki/' + topic, source: 'Wikipedia' },
+                        { title: topic + ' Study Materials', url: 'https://www.scribd.com/search?query=' + topic, source: 'Scribd' },
+                        { title: topic + ' E-books and Resources', url: 'https://www.pdfdrive.com/search?q=' + topic, source: 'PDF Drive' }
+                    ]
+                };
+            }
+        }
+    </script>
+</body>
+</html>
