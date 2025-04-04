@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
         
         <meta name="google" content="notranslate">
     
@@ -80,43 +79,57 @@ body {
     z-index: -1;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 15px;
-    background-color: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(5px);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 10;
-}
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #6363F7;
-}
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-}
 
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #6363F7;
-}
+.navbar {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        
+        .navbar .logo {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .language-btn {           
+           background: rgba(74, 0, 224, 0.8);
+           color: white;
+           border: none;
+           padding: 8px 16px;
+           border-radius: 20px;
+           cursor: pointer;
+           font-weight: 500;
+           transition: all 0.3s ease;
+           margin-left: 20px;
+       }
+       
+       .language-btn:hover {
+           /* background-color: #5252e0;
+           transform: translateY(-2px); */
+           background: #4a00e0;
+           transform: translateY(-2px);
+           box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+       }
 
 /* Hero Section */
 .hero {
@@ -221,26 +234,15 @@ nav ul li a:hover {
 }
 
 
-        /* Only new CSS for language toggle */
-        .language-item {
-            margin-left: auto;
-        }
-        .lang-toggle {
-            background: rgba(74, 0, 224, 0.8);
+        
+        .footer {
+            background-color: #6363F7;
             color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-left: 20px;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
         }
-        .lang-toggle:hover {
-            background: #4a00e0;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
-        }
+
     </style>
 </head>
 <body>
@@ -320,22 +322,21 @@ nav ul li a:hover {
     </div>
     <div class="bg-overlay"></div>
 
-    <header>
-        <h1 class="logo" data-key="logo">AI Assist</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html" data-key="home">Home</a></li>
-                <li><a href="teacher.html" data-key="teacher">Teacher</a></li>
-                <li><a href="student.html" data-key="student">Student</a></li>
-                <li><a href="learning.html" data-key="learning">Learning</a></li>
-                <li><a href="support.html" data-key="support">Support</a></li>
-                <li><a href="query_portal.html" data-key="Query">Query</a></li>
-                <li class="language-item">
-                    <button id="languageButton" onclick="switchLanguage()" class="lang-toggle">हिंदी</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
+   
+   
+
+    <div class="navbar">
+        <div class="logo" data-key="logo">AI Assist</div>
+        <div class="nav-links">
+            <a href="index.html" data-key="home">Home</a>
+            <a href="teacher.html" data-key="teacher">Teacher</a>
+            <a href="student.html" data-key="student">Student</a>
+            <a href="learning.html" data-key="learning">Learning</a>            
+            <a href="query_portal.html" data-key="Query">Query</a>
+            <a href="support.html" data-key="support">Support</a>
+            <button class="language-btn" id="languageToggle" onclick="toggleLanguage()">हिंदी</button>
+        </div>
+    </div>
 
     <main>
         <section class="hero">
@@ -355,9 +356,13 @@ nav ul li a:hover {
             </a>
         </div>
     </main>
-    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 EdTech Assistant. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        // Language Management
         const translations = {
             'en': {
                 'logo': 'AI Assist',
@@ -379,7 +384,7 @@ nav ul li a:hover {
                 'home': 'होम',
                 'teacher': 'शिक्षक',
                 'student': 'छात्र',
-                'learning': 'हमारे बारे में',
+                'learning': 'सीखना',
                 'support': 'सहायता',
                 'Query': 'प्रश्न',
                 'welcome': 'एडटेक सहायक में आपका स्वागत है',
@@ -394,7 +399,7 @@ nav ul li a:hover {
         let currentLang = localStorage.getItem('language') || 'en';
         const langButton = document.getElementById('languageButton');
     
-        function switchLanguage() {
+        function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'hi' : 'en';
             updateLanguage();
             localStorage.setItem('language', currentLang);
@@ -409,12 +414,12 @@ nav ul li a:hover {
             });
         }
     
-        // Initialize
+        
         document.addEventListener('DOMContentLoaded', () => {
             updateLanguage();
             langButton.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
             
-            // Original floating elements initialization
+           
             document.querySelectorAll('.floating').forEach(el => {
                 const duration = 4 + Math.random() * 4;
                 el.style.animationDuration = `${duration}s`;

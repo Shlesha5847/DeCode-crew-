@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Tracking System</title>
-    <!-- <link rel="stylesheet" href="teacher.css"> -->
+     <link rel="stylesheet" href="teacher.css"> -->
     <style>
         
         :root {
@@ -331,7 +331,33 @@
             75% { transform: translate3d(-15px, -5px, 15px) rotate(1deg); }
             100% { transform: translate3d(5px, -15px, 5px) rotate(-2deg); }
         }
-  
+        .language-btn {
+           
+            background: rgba(74, 0, 224, 0.8);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+        
+        .language-btn:hover {
+            /* background-color: #5252e0;
+            transform: translateY(-2px); */
+            background: #4a00e0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
+        }
+        .footer {
+            background-color: #6363F7;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
@@ -339,12 +365,14 @@
     <div class="navbar">
         <div class="logo">AI Assist</div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="teacher.html">Teacher</a>
-            <a href="student.html">Student</a>
-            <a href="learning.html">Learning</a>
-            <a href="support.html">Support</a>
-            <a href="query_portal.html" data-key="Query">Query</a>
+            <a href="index.html" data-en="Home" data-hi="होम">Home</a>
+            <a href="teacher.html" data-en="Teacher" data-hi="शिक्षक">Teacher</a>
+            <a href="student.html" data-en="Student" data-hi="छात्र">Student</a>
+            <a href="learning.html" data-en="Learning" data-hi="सीखना">Learning</a>
+            
+            <a href="query_portal.html" data-en="Query" data-hi="प्रश्न">Query</a>
+            <a href="support.html" data-en="Support" data-hi="सहायता">Support</a>
+            <button class="language-btn" id="languageToggle" onclick="toggleLanguage()">हिंदी</button>
         </div>
     </div>
     
@@ -353,109 +381,152 @@
     <div class="bg-element bg-element-2">📝</div>
     <div class="bg-element bg-element-3">✓</div>
     
-    <div  class="container">
+    <div class="container">
         <header>
-            <h1>Test Tracking System</h1>
-            <p>Track your test results, upload assignments, and get feedback</p>
+            <h1 data-en="Test Tracking System" data-hi="परीक्षा ट्रैकिंग प्रणाली">Test Tracking System</h1>
+            <p data-en="Track your test results, upload assignments, and get feedback" 
+               data-hi="अपने परीक्षा परिणामों को ट्रैक करें, असाइनमेंट अपलोड करें और प्रतिक्रिया प्राप्त करें">
+                Track your test results, upload assignments, and get feedback
+            </p>
         </header>
-        
         
         <div class="main-content">
             <div class="main-panel">
                 <div class="card ai-assist-section card-3d">
                     <div class="ai-badge">AI Assist</div>
-                    <h2 class="card-title">Upload Test Papers</h2>
+                    <h2 class="card-title" data-en="Upload Test Papers" data-hi="परीक्षा पत्र अपलोड करें">Upload Test Papers</h2>
                     
                     <form id="test-form">
                         <div class="form-group">
-                            <label for="id">Teacher ID:</label>
-                            <input type="text" id="teacher-id" name="teacher_id" placeholder="Enter Teacher ID">
+                            <label for="id" data-en="Teacher ID:" data-hi="शिक्षक आईडी:">Teacher ID:</label>
+                            <input type="text" id="teacher-id" name="teacher_id" placeholder="Enter Teacher ID" data-en-placeholder="Enter Teacher ID" data-hi-placeholder="शिक्षक आईडी दर्ज करें">
                         </div>
                         <div class="form-group">
-                            <label for="id">Student ID:</label>
-                            <input type="text" id="student-id" name="student" placeholder="Enter Student ID">
+                            <label for="id" data-en="Student ID:" data-hi="छात्र आईडी:">Student ID:</label>
+                            <input type="text" id="student-id" name="student" placeholder="Enter Student ID" data-en-placeholder="Enter Student ID" data-hi-placeholder="छात्र आईडी दर्ज करें">
                         </div>
                         <div class="form-group">
-                            <label for="test-type">Type of Test</label>
+                            <label for="test-type" data-en="Type of Test" data-hi="परीक्षा का प्रकार">Type of Test</label>
                             <select id="test-type" required>
-                                <option value="">Select test type</option>
-                                <option value="mcq">MCQs</option>
-                                <option value="fill_ups">Fill_Ups</option>
-                                <option value="one_word">One_Word</option>
-                                <option value="q_a">Handwritten type</option>
+                                <option value="" data-en="Select test type" data-hi="परीक्षा प्रकार चुनें">Select test type</option>
+                                <option value="mcq" data-en="MCQs" data-hi="बहुविकल्पीय">MCQs</option>
+                                <option value="fill_ups" data-en="Fill_Ups" data-hi="रिक्त स्थान भरें">Fill_Ups</option>
+                                <option value="one_word" data-en="One_Word" data-hi="एक शब्द">One_Word</option>
+                                <option value="q_a" data-en="Handwritten type" data-hi="हस्तलिखित प्रकार">Handwritten type</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label for="level">Student Class</label>
+                            <label for="level" data-en="Student Class" data-hi="छात्र कक्षा">Student Class</label>
                             <select id="level" required>
-                                <option value="">Select class</option>
-                                <option value="class_6">Class 6</option>
-                                <option value="class_7">Class 7</option>
-                                <option value="class_8">Class 8</option>
-                                <option value="class_9">Class 9</option>
-                                <option value="class_10">Class 10</option>
+                                <option value="" data-en="Select class" data-hi="कक्षा चुनें">Select class</option>
+                                <option value="class_6" data-en="Class 6" data-hi="कक्षा 6">Class 6</option>
+                                <option value="class_7" data-en="Class 7" data-hi="कक्षा 7">Class 7</option>
+                                <option value="class_8" data-en="Class 8" data-hi="कक्षा 8">Class 8</option>
+                                <option value="class_9" data-en="Class 9" data-hi="कक्षा 9">Class 9</option>
+                                <option value="class_10" data-en="Class 10" data-hi="कक्षा 10">Class 10</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label>Upload Student File</label>
+                            <label data-en="Upload Student File" data-hi="छात्र फाइल अपलोड करें">Upload Student File</label>
                             <div class="file-upload1" id="file-upload-area">
                                 <input type="file" id="student-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
                         </div>
                         <div class="form-group">
-                            <label>Upload Correct Answer File</label>
+                            <label data-en="Upload Correct Answer File" data-hi="सही उत्तर फाइल अपलोड करें">Upload Correct Answer File</label>
                             <div class="file-upload2" id="file-upload-area">
                                 <input type="file" id="answer-file" accept=".pdf,.doc,.docx,.jpg,.png">
                             </div>
                             <p id="file-name"></p>
                         </div>
-                        <button class="custom-btn" id = "but">Submit Test Results</button>
+                        <button class="custom-btn" id="but" data-en="Submit Test Results" data-hi="परीक्षा परिणाम सबमिट करें">Submit Test Results</button>
                     </form>
                 </div>
-                
-                
             </div>
-            
         </div>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 EdTech Assistant. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
+        // Language toggle functionality
+        let currentLanguage = 'en';
+        
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'hi' : 'en';
+            updateLanguage();
+            document.getElementById('languageToggle').textContent = currentLanguage === 'en' ? 'हिंदी' : 'English';
+        }
+        
+        function updateLanguage() {
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en], [data-hi]').forEach(element => {
+                if (element.hasAttribute(`data-${currentLanguage}`)) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
+                        // Handle placeholders for input elements
+                        const placeholderAttr = `${currentLanguage}-placeholder`;
+                        if (element.hasAttribute(`data-${placeholderAttr}`)) {
+                            element.placeholder = element.getAttribute(`data-${placeholderAttr}`);
+                        }
+                        // Handle option text for select elements
+                        if (element.tagName === 'SELECT') {
+                            Array.from(element.options).forEach(option => {
+                                if (option.hasAttribute(`data-${currentLanguage}`)) {
+                                    option.textContent = option.getAttribute(`data-${currentLanguage}`);
+                                }
+                            });
+                        }
+                    } else {
+                        // Handle regular text content
+                        element.textContent = element.getAttribute(`data-${currentLanguage}`);
+                    }
+                }
+            });
+        }
+
+        // Form submission handler
         document.getElementById("but").addEventListener("click", function () {
             event.preventDefault();
             let teacherID = document.getElementById("teacher-id").value;
             let studentID = document.getElementById("student-id").value;
             let testType = document.getElementById("test-type").value;
             let studentClass = document.getElementById("level").value;
-        if (!teacherID || !studentID || !testType || !studentClass) {
-            alert("Please fill in all required fields.");
-            return;
-        }
-        window.location.href = `results.html?teacherID=${teacherID}&studentID=${studentID}&testType=${testType}&studentClass=${studentClass}`;
+            if (!teacherID || !studentID || !testType || !studentClass) {
+                alert(currentLanguage === 'en' ? "Please fill in all required fields." : "कृपया सभी आवश्यक फ़ील्ड भरें।");
+                return;
+            }
+            window.location.href = `results.html?teacherID=${teacherID}&studentID=${studentID}&testType=${testType}&studentClass=${studentClass}`;
         });
-        function goBack() {
-            document.getElementById('subs').style.display = 'none';
-            document.getElementById('mains').style.display = 'block';
-        }
+
         function handleFileUpload(inputId, displayId) {
-      const input = document.getElementById(inputId);
-      const display = document.getElementById(displayId);
+            const input = document.getElementById(inputId);
+            const display = document.getElementById(displayId);
 
-      input.addEventListener("change", function () {
-        if (input.files.length > 0) {
-          display.textContent = `Selected file: ${input.files[0].name}`;
-        } else {
-          display.textContent = "No file selected.";
+            input.addEventListener("change", function () {
+                if (input.files.length > 0) {
+                    display.textContent = currentLanguage === 'en' 
+                        ? `Selected file: ${input.files[0].name}` 
+                        : `चयनित फ़ाइल: ${input.files[0].name}`;
+                } else {
+                    display.textContent = currentLanguage === 'en' 
+                        ? "No file selected." 
+                        : "कोई फ़ाइल चयनित नहीं।";
+                }
+            });
         }
-      });
-    }
 
-    handleFileUpload("fileUpload1", "fileDisplay1");
-    handleFileUpload("fileUpload2", "fileDisplay2");
-
-
+        handleFileUpload("fileUpload1", "fileDisplay1");
+        handleFileUpload("fileUpload2", "fileDisplay2");
     </script>
    
 </body>
 </html>
+
+ 
+

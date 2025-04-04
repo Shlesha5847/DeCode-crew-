@@ -9,33 +9,54 @@ body {
     background-color: #f0f0ff;
 }
 
-.header {
+
+.navbar {
+    background-color: white;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
-.logo {
-    color: #5757f0;
-    font-size: 1.5rem;
+.navbar .logo {
+    color: var(--primary-color);
     font-weight: bold;
-    text-decoration: none;
+    font-size: 1.5rem;
 }
 
-.nav-links {
+.navbar .nav-links {
     display: flex;
-    gap: 1.5rem;
-    transform: translateX(300px);
+    gap: 20px;
 }
 
-.nav-links a {
+.navbar .nav-links a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    
+}
+.language-btn {           
+   background: rgba(74, 0, 224, 0.8);
+   color: white;
+   border: none;
+   padding: 8px 16px;
+   border-radius: 20px;
+   cursor: pointer;
+   font-weight: 500;
+   transition: all 0.3s ease;
+   margin-left: 20px;
+}
+
+.language-btn:hover {
+   /* background-color: #5252e0;
+   transform: translateY(-2px); */
+   background: #4a00e0;
+   transform: translateY(-2px);
+   box-shadow: 0 4px 15px rgba(74, 0, 224, 0.3);
 }
 
 .container {
@@ -407,22 +428,29 @@ tr:hover {
     background-color: #e0e0e0;
     text-decoration: underline;
 }
-.header {
+.footer {
+    background-color: #6363F7;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+/* .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
     /* Your existing header styles */
-}
+/* }
 
 .nav-links {
     display: flex;
     gap: 1.5rem;
     /* Your existing nav styles */
-}
+/* }  */
 
 /* Updated language button style for header */
-.language-btn {
+/* .language-btn {
     background: #6363F7;
     color: white;
     border: none;
@@ -437,4 +465,4 @@ tr:hover {
 .language-btn:hover {
     background: #4f4fdf;
     transform: translateY(-2px);
-}
+} */
