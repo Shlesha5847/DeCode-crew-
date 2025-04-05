@@ -4,16 +4,16 @@ import re
 import easyocr
 from spellchecker import SpellChecker
 
-warnings.filterwarnings("ignore")  # Suppress warnings
+warnings.filterwarnings("ignore")  
 
-# ✅ Step 1: Initialize EasyOCR reader
-reader = easyocr.Reader(['en'])  # Load English OCR model
 
-# ✅ Step 2: Read text from image
-image_path = 'Testing2.jpg'  # Replace with your image path
+reader = easyocr.Reader(['en'])  
+
+
+image_path = 'Testing2.jpg' 
 results = reader.readtext(image_path)
 
-# ✅ Extract text from OCR results
+
 extracted_text = " ".join([res[1] for res in results])
 print("OCR Extracted Text:", extracted_text)
 
