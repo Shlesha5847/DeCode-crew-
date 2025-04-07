@@ -17,7 +17,6 @@ results = reader.readtext(image_path)
 extracted_text = " ".join([res[1] for res in results])
 print("OCR Extracted Text:", extracted_text)
 
-# ✅ Step 3: Spell Correction
 spell = SpellChecker()
 def correct_word(word):
     """Correct only words containing only alphabets, keep numbers and symbols unchanged."""
@@ -25,19 +24,14 @@ def correct_word(word):
 words = extracted_text.split()
 corrected_text = " ".join([correct_word(word) for word in words])
 print("Corrected Text:", corrected_text)
-# ✅ Step 4: Configure Google Gemini API
-GEMINI_API_KEY = "AIzaSyBO7EU1gsy7kGKSeTyfBEKZPlvdRDCAIT0"  # Replace with your API key
+GEMINI_API_KEY = "AIzaSyBO7EU1gsy7kGKSeTyfBEKZPlvdRDCAIT0" 
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GEMINI_API_KEY}"
 
-# ✅ Teacher's Correct Answer
 correct_answer = """
 Stack is a data structure that works on LIFO (Last In First Out). Stack is used in parenthesis checking.
 """
-
-# ✅ Student's Answer (from OCR and spell correction)
 student_answer = corrected_text
 
-# ✅ Gemini Prompt for Evaluation
 payload = {
     "contents": [{
         "parts": [{
@@ -64,16 +58,11 @@ payload = {
         }]
     }]
 }
-
-# ✅ Headers for API request
 headers = {
     "Content-Type": "application/json"
 }
-
-# ✅ Send the request to Gemini API
 response = requests.post(API_URL, headers=headers, json=payload)
 
-# ✅ Process API Response
 if response.status_code == 200:
     result = response.json()
     
